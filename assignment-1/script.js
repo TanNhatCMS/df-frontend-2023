@@ -46,6 +46,14 @@
     }
 
     
+const searchInput = document.getElementById("search");
+
+
+searchInput.addEventListener("input", function() {
+    const query = searchInput.value.toLowerCase();
+    searchBooks(query);
+});
+
     function searchBooks(query) {
         const results = books.filter(book => book.title.toLowerCase().includes(query.toLowerCase()));
         displayBooks(results);
