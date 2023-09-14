@@ -7,10 +7,11 @@
     
     const bookList = document.getElementById("book-list");
     const addBookForm = document.getElementById("add-book-form");
+    const searchBookForm = document.getElementById("search-book-form");
     const titleInput = document.getElementById("title");
     const authorInput = document.getElementById("author");
     const topicInput = document.getElementById("topic");
-
+    const searchInput = document.getElementById("search");
    
     function displayBooks() {
         bookList.innerHTML = "";
@@ -46,13 +47,13 @@
     }
 
     
-const searchInput = document.getElementById("search");
 
-
-searchInput.addEventListener("input", function() {
-    const query = searchInput.value.toLowerCase();
-    searchBooks(query);
-});
+searchBookForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const query = searchInput.value.toLowerCase();
+        searchBooks(query);
+        
+    });
 
     function searchBooks(query) {
         const results = books.filter(book => book.title.toLowerCase().includes(query.toLowerCase()));
