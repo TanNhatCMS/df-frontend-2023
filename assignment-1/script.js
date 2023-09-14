@@ -41,12 +41,17 @@
     });
 
    
-    function deleteBook(index) {
+  
+function deleteBook(index) {
+  
+    const isConfirmed = confirm("Bạn có chắc chắn muốn xóa cuốn sách này?");
+    
+    if (isConfirmed) {
         books.splice(index, 1);
         displayBooks();
     }
+}
 
-    
 function redisplayBooks(booksToDisplay) {
     bookList.innerHTML = "";
     for (let i = 0; i < booksToDisplay.length; i++) {
