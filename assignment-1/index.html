@@ -7,31 +7,35 @@
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <h1>Bookstore CMS</h1>
-    <table id="book-table">
+    <h1>Quản lý sách</h1>
+
+    <!-- Ô tìm kiếm -->
+    <input type="text" id="searchInput" placeholder="Tìm kiếm theo tiêu đề">
+
+    <!-- Bảng hiển thị danh sách sách -->
+    <table>
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Topic</th>
-                <th>Action</th>
+                <th>Tên sách</th>
+                <th>Tác giả</th>
+                <th>Chủ đề</th>
+                <th>Xóa</th>
             </tr>
         </thead>
-        <tbody id="book-list">
-            <!-- Book records will be displayed here -->
+        <tbody id="bookList">
+            <!-- Dữ liệu sách sẽ được thêm vào đây -->
         </tbody>
     </table>
-    <form id="add-book-form">
-        <h2>Add New Book</h2>
-        <label for="title">Title:</label>
-        <input type="text" id="title" required>
-        <label for="author">Author:</label>
-        <input type="text" id="author" required>
-        <label for="topic">Topic:</label>
-        <input type="text" id="topic" required>
-        <button type="submit">Add Book</button>
+
+    <!-- Biểu mẫu thêm sách mới -->
+    <h2>Thêm sách mới</h2>
+    <form id="addBookForm">
+        <input type="text" id="bookName" placeholder="Tên sách" required>
+        <input type="text" id="author" placeholder="Tác giả" required>
+        <input type="text" id="topic" placeholder="Chủ đề" required>
+        <button type="submit">Thêm</button>
     </form>
-    <input type="text" id="search-input" placeholder="Search by title">
+
     <script src="script.js"></script>
 </body>
 </html>
