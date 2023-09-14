@@ -47,6 +47,20 @@
     }
 
     
+function displayBooks(booksToDisplay) {
+    bookList.innerHTML = "";
+    for (let i = 0; i < booksToDisplay.length; i++) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${booksToDisplay[i].title}</td>
+            <td>${booksToDisplay[i].author}</td>
+            <td>${booksToDisplay[i].topic}</td>
+            <td><button onclick="deleteBook(${i})">Xóa</button></td>
+        `;
+        bookList.appendChild(row);
+    }
+}
+
 
 searchBookForm.addEventListener("submit", function (e) {
         e.preventDefault();
