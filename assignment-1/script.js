@@ -47,7 +47,7 @@
     }
 
     
-function displayBooks(booksToDisplay) {
+function redisplayBooks(booksToDisplay) {
     bookList.innerHTML = "";
     for (let i = 0; i < booksToDisplay.length; i++) {
         const row = document.createElement("tr");
@@ -71,7 +71,7 @@ searchBookForm.addEventListener("submit", function (e) {
 
     function searchBooks(query) {
         const results = books.filter(book => book.title.toLowerCase().includes(query.toLowerCase()));
-        displayBooks(results);
+        redisplayBooks(results);
     }
 
     
