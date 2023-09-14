@@ -6,9 +6,32 @@
     <title>Bookstore</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
-
   <body>
-    Hello world
+    <h1>Bookstore CMS</h1>
+    <table id="book-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Topic</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="book-list">
+            <!-- Book records will be displayed here -->
+        </tbody>
+    </table>
+    <form id="add-book-form">
+        <h2>Add New Book</h2>
+        <label for="title">Title:</label>
+        <input type="text" id="title" required>
+        <label for="author">Author:</label>
+        <input type="text" id="author" required>
+        <label for="topic">Topic:</label>
+        <input type="text" id="topic" required>
+        <button type="submit">Add Book</button>
+    </form>
+    <input type="text" id="search-input" placeholder="Search by title">
     <script src="script.js"></script>
-  </body>
+</body>
 </html>
