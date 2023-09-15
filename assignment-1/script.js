@@ -80,21 +80,6 @@ document.getElementById("vietnamese-button").addEventListener("click", function 
     updateTextByLanguage();
 });
 
-function displayBooks() {
-    bookList.innerHTML = "";
-    for (let i = 0; i < books.length; i++) {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-                <td>${books[i].name}</td>
-                <td>${books[i].author}</td>
-                <td>${books[i].topic}</td>
-                <td><button onclick="showDeleteConfirmation(${i})">Xóa</button></td>
-            `;
-        bookList.appendChild(row);
-    }
-}
-
-
 addBookForm.addEventListener("submit", function (e) {
     e.preventDefault();
     const newBook = {
@@ -133,7 +118,7 @@ function deleteBook(index) {
     displayBooks();
 }
 
-function redisplayBooks(booksToDisplay) {
+function displayBooks(booksToDisplay) {
     bookList.innerHTML = "";
     for (let i = 0; i < booksToDisplay.length; i++) {
         const row = document.createElement("tr");
@@ -141,7 +126,7 @@ function redisplayBooks(booksToDisplay) {
             <td>${booksToDisplay[i].name}</td>
             <td>${booksToDisplay[i].author}</td>
             <td>${booksToDisplay[i].topic}</td>
-            <td><button onclick="deleteBook(${i})">Xóa</button></td>
+            <td><button onclick="showDeleteConfirmation(${i})">Xóa</button></td>
         `;
         bookList.appendChild(row);
     }
@@ -161,4 +146,4 @@ function searchBooks(query) {
 }
 
 
-displayBooks();
+displayBooks(books);
