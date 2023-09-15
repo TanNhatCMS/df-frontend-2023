@@ -1,0 +1,42 @@
+{
+    "en": {
+        "language": "English",
+        "titleSite": "BookStore",
+        "addBook": "Add Book",
+        "addButton": "Create",
+        "cancelButton": "Cancel",
+        "searchPlaceholder": "Search Book",
+        "modalTitle": "Add New Book",
+        "nameLabel": "Name",
+        "editButton": "Edit",
+        "deleteButton": "Delete",
+        "authorLabel": "Author",
+        "topicLabel": "Topic",
+        "confirmButton": "Confirm",
+        "closeButton": "Close",
+        "idLabel": "#",
+        "selectTopic": "Select Topic",
+        "editBook": "Edit Book",
+        "saveBook": "Save Book"
+    },
+    "vi": {
+        "language": "Tiếng Việt",
+        "titleSite": "Cửa hàng sách",
+        "addBook": "Thêm Sách Mới",
+        "addButton": "Thêm",
+        "cancelButton": "Hủy",
+        "searchPlaceholder": "Tìm Sách",
+        "modalTitle": "Thêm Sách Mới",
+        "nameLabel": "Tên Sách",
+        "editButton": "Sửa",
+        "deleteButton": "Xoá",
+        "authorLabel": "Tác giả",
+        "topicLabel": "Chủ đề",
+        "confirmButton": "Xác nhận",
+        "closeButton": "Đóng",
+        "idLabel": "STT",
+        "selectTopic": "Chọn chủ đề",
+        "editBook": "Sửa thông tin sách",
+        "saveBook": "Lưu"
+    }
+}

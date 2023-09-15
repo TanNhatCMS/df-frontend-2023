@@ -1,80 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Bookstore</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="languages.css" rel="stylesheet" type="text/css" />
+
 </head>
 
 <body>
-    <!-- Modal xác nhận xóa -->
-    <div id="deleteConfirmationModal" class="modal">
-        <div class="modal-content">
-            <h2>Delete book</h2>
-            <p>Do you want to delete book?</p>
-            <button id="confirmDeleteButton">Delete</button>
-            <button id="cancelDeleteButton">Cancel</button>
-        </div>
-    </div>
 
-    <!-- Modal nhập sách mới -->
-    <div id="addBookModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeAddBookModal">&times;</span>
-            <h2 data-i18n="modalTitle">Add book</h2>
-            <form id="add-book-form">
-                <label for="name" data-i18n="nameLabel">Name</label>
-                <input type="text" id="name" required>
-                <label for="author" data-i18n="authorLabel">Author</label>
-                <input type="text" id="author" required>
-                <label for="topic" data-i18n="topicLabel">Topic</label>
-                <select id="topic" required>
-                </select>
-                <button data-i18n="addButton" type="submit">Create</button>
-            </form>
-        </div>
-    </div>
+    <header class="header-container">
+        <nav class="header">
+            <div class="left-side">
+                <h1 data-i18n="titleSite" class="header-title">BookStore</h1>
+            </div>
+            <div class="profile">
+                <div class="profile-avatar">
+                    <!-- Hình đại diện ở đây -->
+                    <img src="https://avatars.githubusercontent.com/u/113796420?v=4" alt="Avatar TânNhậtCMS">
+                </div>
+                <div class="user-name">TânNhậtCMS</div>
+                <div id="language-dropdown" class="dropdown">
+                    <button class="dropbtn">
+                        <label data-i18n="language">English</label>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="#" id="english-button">
+                            English
+                        </a>
+                        <a href="#" id="vietnamese-button">
+                            Tiếng Việt
+                        </a>
+                    </div>
+                </div>
+            </div>
 
-    <h1>Quản lý sách</h1>
+        </nav>
+    </header>
 
-    <!-- Ô tìm kiếm -->
-
-    <form id="search-book-form">
-        <input type="text" id="search" placeholder="Tìm kiếm theo tiêu đề">
-        <button type="submit">Tìm kiếm</button>
-    </form>
-    <!-- Bảng hiển thị danh sách sách -->
-    <table>
-        <thead>
-            <tr>
-                <th><label for="title" data-i18n="titleLabel">Title</label></th>
-                <th><label for="author" data-i18n="authorLabel">Author</label></th>
-                <th><label for="topic" data-i18n="topicLabel">Topic</label></th>
-                <th><label for="topic" data-i18n="topicLabel">Action</label></th>
-            </tr>
-        </thead>
-        <tbody id="book-list">
-            <!-- Dữ liệu sách sẽ được hiển thị ở đây -->
-        </tbody>
-    </table>
-
-    <!-- Biểu mẫu thêm sách mới -->
-    <h2>Thêm sách mới</h2>
-    <form id="add-book-form">
-        <input type="text" id="title" placeholder="Tiêu đề" required><br>
-        <input type="text" id="author" placeholder="Tác giả" required><br>
-        <input type="text" id="topic" placeholder="Chủ đề" required><br>
-        <button type="submit">Thêm</button>
-    </form>
-
-    <div id="language-switcher">
-        <button id="english-button">English</button>
-        <button id="vietnamese-button">Tiếng Việt</button>
-    </div>
-
+    <main class="container">
+        <section class="section-table">
+            <div class="table-search-add">
+                <div>
+                    <input id="search-input" name="search-book" class="form-input" type="search"
+                        placeholder="Search Book" />
+                </div>
+                <button type="button" class="form-btn" data-i18n="addBook" id="btn-add-book" onclick="ModalAdd()">
+                    Add Book
+                </button>
+            </div>
+            <div>
+                <table id="table-book" class="table-book table-bordered">
+                    <thead>
+                        <tr>
+                            <th><label data-i18n="idLabel">#</label></th>
+                            <th><label for="name" data-i18n="nameLabel">Name</label></th>
+                            <th><label for="author" data-i18n="authorLabel">Author</label></th>
+                            <th><label for="topic" data-i18n="topicLabel">Topic</label></th>
+                            <th><label for="topic" data-i18n="topicLabel">Action</label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr></tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section>
+            <div class="modal modal-add-book hidden">
+                <button class="close-modal" id="close-modal-add">&times;</button>
+                <h2 id="title-modal">Add Book </h2>
+                <form action="" onsubmit="return false">
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="nameLabel">Name</label>
+                        <input class="form-input" type="text" id="name" placeholder="Enter Name" required />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="authorLabel">Author</label>
+                        <input class="form-input" type="text" id="author" placeholder="Enter Author" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="select-topic" class="form-label" data-i18n="topicLabel">Topic</label>
+                        <select id="select-topic" class="form-input-select"
+                            style="background-image: url('/assets/chevron-down.svg')">
+                            <option class="option-text" selected disabled value="null">
+                                Select Topic
+                            </option>
+                        </select>
+                    </div>
+                    <button onclick="onSubmitForm()" class="submit-btn" type="button" id="submit-btn">
+                        Add book
+                    </button>
+                </form>
+            </div>
+            <div class="overlay overlay-add hidden"></div>
+        </section>
+        <section>
+            <div class="modal modal-confirm-delete hidden">
+                <button class="close-modal" id="close-modal-delete">&times;</button>
+                <h2>Delete Book </h2>
+                <p class="modal-text">
+                    Do you want to delete <b id="delete-name"></b> book ?
+                </p>
+                <div class="modal-btn">
+                    <button onclick="Delete()" style="
+                  background-color: transparent !important;
+                  color: #212529;
+                  border: none;
+                " type="button" class="form-btn">
+                        Delete
+                    </button>
+                    <button type="button" class="form-btn" id="btn-cancel">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+            <div class="overlay overlay-delete hidden"></div>
+        </section>
+    </main>
     <script src="script.js"></script>
+    <script src="languages.js"></script>
 </body>
 
 </html>

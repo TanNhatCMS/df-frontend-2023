@@ -1,6 +1,44 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 html {
     height: 100%;
     width: 100%;
+    font-size: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+:root {
+    --color-primary: #D3455A;
+    --color-primary-hover: #e2586d;
+    --color-white: #fff;
+    --color-black: #000;
+}
+
+button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+input,
+select {
+    padding: 15px 30px;
+    border-radius: 4px;
+    outline: none;
+    border: 2px solid #606060;
+    margin: 5px 0;
+    width: 100%;
+}
+
+::placeholder {
+    font-size: 16px;
+    font-weight: 600;
+
 }
 
 body {
@@ -51,15 +89,6 @@ button {
     border-radius: 4px;
 }
 
-button {
-    background-color: #007BFF;
-    color: #fff;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
 
 #search {
     padding: 10px;
@@ -71,76 +100,323 @@ button:hover {
 button {
     background-color: #ff3333;
     color: #fff;
+    cursor: pointer;
 }
 
 button:hover {
     background-color: #ff0000;
 }
 
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 5rem;
+}
+
+
+
+.section_user {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 10px 40px;
+    border-radius: 4px;
+    border: 2px solid #dadada;
+}
+
+.user_name {
+    font-size: 20px;
+    font-weight: 600;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    height: 3rem;
+    gap: 0.5rem;
+    max-width: 200px;
+}
+
+.user_name span {
+    width: 40px;
+    height: 40px;
+    border-radius: 10000px;
+    background-color: #dddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 16px 0;
+}
+
+.header-container {
+    border-bottom: 2px solid #bab9b9;
+    padding: 16px 0;
+
+}
+
+
+
+.header-container .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.user-image {
+    background-size: 32px 32px;
+    border: 0;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    height: 32px;
+    width: 32px;
+    z-index: 0;
+}
+
+.user-name {
+    color: #141a4e;
+    margin: auto;
+}
+
+.container {
+    width: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 16px 0;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.section-table {
+    margin-top: 20px;
+}
+
+.table-search-add {
+    margin: 0 0 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 18px;
+}
+
+.form-group {
+    margin-bottom: 0.5rem;
+}
+
+.form-label {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+}
+
+.form-input {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-input-select {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 2.25rem 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-image: url(/assets/chevron-down.svg);
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    appearance: none
+}
+
+.form-input:focus,
+.form-input-select:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: #d3445b;
+    outline: 0;
+    box-shadow: 0 0 0 0.1rem #de7c8b;
+}
+
+.form-btn {
+    color: #fff;
+    background-color: #d3445b;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid #d3445b;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-btn:hover {
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+}
+
+.table-book {
+    width: 100%;
+    color: #212529;
+    vertical-align: top;
+    border-color: #dee2e6;
+    border-collapse: collapse;
+}
+
+.edit-book {
+    margin-right: 15px;
+    color: #ffc107;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.delete-book {
+    color: #dc3545;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+
+.show-modal {
+    font-size: 2rem;
+    font-weight: 600;
+    padding: 1.2rem 2.5rem;
+    margin: 5rem 2rem;
+    border: none;
+    background-color: rgb(92, 22, 139);
+    color: rgb(241, 241, 241);
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
 .modal {
-    display: none;
-    position: fixed;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background-color: white;
+    padding: 4rem;
+    border-radius: 5px;
+    box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+
+.modal h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.modal-text {
+    margin-bottom: 2rem;
+    width: 100%;
+}
+
+.modal-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3rem;
+}
+
+form .submit-btn {
+    display: block;
+    width: 100%;
+    margin: 1.3rem 0;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+
+form .submit-btn {
+    background-color: #d3445b;
+    color: #fff;
+}
+
+.overlay {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.6);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    z-index: 5;
 }
 
-.modal-content {
-    background-color: #fff;
-    margin: 20% auto;
-    padding: 20px;
-    width: 50%;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-
-#confirmDeleteButton,
-#cancelDeleteButton {
-    margin: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-#confirmDeleteButton {
-    background-color: #ff3333;
-    color: #fff;
-    border: none;
-}
-
-#confirmDeleteButton:hover {
-    background-color: #ff0000;
-}
-
-#cancelDeleteButton {
-    background-color: #ccc;
-    border: none;
-}
-
-#closeAddBookModal {
+.close-modal {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0.8rem;
+    right: 1.3rem;
+    font-size: 2.5rem;
+    color: #333;
     cursor: pointer;
+    border: none;
+    background: none;
 }
 
-#add-book-form input {
-    margin: 10px 0;
-    padding: 10px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
 
-#add-book-form button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-}
-
-#closeAddBookModal:hover {
-    color: #ff0000;
+.hidden {
+    display: none;
 }
