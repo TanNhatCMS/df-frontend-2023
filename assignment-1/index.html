@@ -101,19 +101,17 @@
         <section>
             <div class="modal modal-confirm-delete hidden">
                 <button class="close-modal" id="close-modal-delete">&times;</button>
-                <h2>Delete Book </h2>
-                <p class="modal-text">
-                    Do you want to delete <b id="delete-name"></b> book ?
-                </p>
+                <h2> <label for="select-topic" class="form-label" data-i18n="deleteBook">Delete Book</label> </h2>
+                <p id="delete-name" class="modal-text"></p>
                 <div class="modal-btn">
-                    <button onclick="Delete()" style="
+                    <button data-i18n="deleteButton" onclick="Delete()" style="
                   background-color: transparent !important;
                   color: #212529;
                   border: none;
                 " type="button" class="form-btn">
                         Delete
                     </button>
-                    <button type="button" class="form-btn" id="btn-cancel">
+                    <button data-i18n="cancelButton" type="button" class="form-btn" id="btn-cancel">
                         Cancel
                     </button>
                 </div>

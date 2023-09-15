@@ -17,7 +17,9 @@
         "idLabel": "#",
         "selectTopic": "Select Topic",
         "editBook": "Edit Book",
-        "saveBook": "Save Book"
+        "saveBook": "Save Book",
+        "deleteBook": "Delete Book",
+        "deleteBookConfirmation": "Do you want to delete "
     },
     "vi": {
         "language": "Tiếng Việt",
@@ -37,6 +39,8 @@
         "idLabel": "STT",
         "selectTopic": "Chọn chủ đề",
         "editBook": "Sửa thông tin sách",
-        "saveBook": "Lưu"
+        "saveBook": "Lưu",
+        "deleteBook": "Xoá sách",
+        "deleteBookConfirmation": "Bạn có muốn xóa "
     }
 }

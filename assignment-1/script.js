@@ -1,23 +1,12 @@
-const bookList = document.getElementById("book-list");
-const addBookForm = document.getElementById("add-book-form");
-const searchBookForm = document.getElementById("search-book-form");
-const nameInput = document.getElementById("name");
-const authorInput = document.getElementById("author");
-const topicInput = document.getElementById("topic");
-
 const searchInput = document.querySelector("#search-input");
-
 const cancelDeleteButton = document.getElementById("cancelDeleteButton");
 const addBookModal = document.getElementById("addBookModal");
 const addBookButton = document.getElementById("addBookButton");
 const closeAddBookModal = document.getElementById("closeAddBookModal");
 const topicSelect = document.getElementById("topic");
-
-
 const modalAdd = document.querySelector('.modal-add-book');
 const closeModalAdd = document.querySelector('#close-modal-add');
 const overlayAdd = document.querySelector('.overlay-add');
-
 const modalDelete = document.querySelector('.modal-confirm-delete');
 const overlayDelete = document.querySelector('.overlay-delete');
 const closeModalDelete = document.querySelector('#close-modal-delete');
@@ -26,15 +15,10 @@ const titleModal = document.getElementById("title-modal");
 const btnSubmit = document.getElementById("submit-btn");
 const deleteName = document.getElementById("delete-name");
 
-
 let currentAction = "";
 let idItem = 0;
-
 let currentUrl = window.location.href;
 let topics = [];
-
-
-let confirmDeleteIndex = null;
 let books = [];
 
 const getAllBook = async () => {
@@ -77,8 +61,8 @@ const setDataTable = (data) => {
                 <td>${item.author}</td>
                 <td>${topicTitle}</td>
                  <td>
-                   <a id="edit-book" onclick="ModalEdit(${item.id}, '${item.name}', '${item.author}', ${item.topic_id})" class="edit-book">Edit</a>
-                   <a id="delete-book" onclick="ModalDelete(${item.id}, '${item.name}')" class="delete-book">Delete</a>
+                   <a data-i18n="editButton" id="edit-book" onclick="ModalEdit(${item.id}, '${item.name}', '${item.author}', ${item.topic_id})" class="edit-book">Edit</a>
+                   <a data-i18n="deleteButton" id="delete-book" onclick="ModalDelete(${item.id}, '${item.name}')" class="delete-book">Delete</a>
                </td>
             `;
         tbody.appendChild(row);
@@ -135,7 +119,7 @@ const toggleModalDelete = () => {
 
 const ModalDelete = (id, name) => {
     idItem = id;
-    deleteName.textContent = name;
+    deleteName.innerHTML = getDelete(name);
     toggleModalDelete();
 }
 const onSubmitForm = () => {
