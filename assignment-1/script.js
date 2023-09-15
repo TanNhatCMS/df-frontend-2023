@@ -122,13 +122,35 @@ const ModalDelete = (id, name) => {
     deleteName.innerHTML = getDelete(name);
     toggleModalDelete();
 }
-const onSubmitForm = () => {
+const validateForm = (name, author, topic) => {
+    var nameError = document.getElementById("name-error");
+    var authorError = document.getElementById("author-error");
+    var topicError = document.getElementById("topic-error");
+    nameError.style.display = "none";
+    authorError.style.display = "none";
+    topicError.style.display = "none";
+    var hasError = false;
+    if (name === "") {
+        nameError.style.display = "block";
+        hasError = true;
+    }
+    if (author === "") {
+        authorError.style.display = "block";
+        hasError = true;
+    }
+    if (topic === "null") {
+        topicError.style.display = "block";
+        hasError = true;
+    }
+    return hasError;
+}
+
+const SubmitForm = () => {
     const name = document.getElementById("name").value;
     const author = document.getElementById("author").value;
     const topicId = document.getElementById("select-topic").value;
 
-    if (name.trim() === "" || author.trim() === "" || topicId === "null") {
-        //   alert("Vui lòng điền đầy đủ thông tin và chọn chủ đề.");
+    if (validateForm(name.trim(), author.trim(), topicId)) {
         return;
     }
     if (currentAction === 'Add') {

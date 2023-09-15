@@ -420,3 +420,12 @@ form .submit-btn {
 .hidden {
     display: none;
 }
+
+.error-msg {
+    display: none;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-top: 5px;
+}

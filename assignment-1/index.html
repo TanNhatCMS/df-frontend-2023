@@ -77,10 +77,12 @@
                     <div class="form-group">
                         <label class="form-label" data-i18n="nameLabel">Name</label>
                         <input class="form-input" type="text" id="name" placeholder="Enter Name" required />
+                        <span class="error-msg" style="display: none;" id="name-error">This field is required.</span>
                     </div>
                     <div class="form-group">
                         <label class="form-label" data-i18n="authorLabel">Author</label>
                         <input class="form-input" type="text" id="author" placeholder="Enter Author" required />
+                        <span class="error-msg" id="author-error" style="display: none;">This field is required.</span>
                     </div>
                     <div class="form-group">
                         <label for="select-topic" class="form-label" data-i18n="topicLabel">Topic</label>
@@ -90,8 +92,9 @@
                                 Select Topic
                             </option>
                         </select>
+                        <span class="error-msg" style="display: none;" id="topic-error">Please select a topic.</span>
                     </div>
-                    <button onclick="onSubmitForm()" class="submit-btn" type="button" id="submit-btn">
+                    <button onclick="SubmitForm()" class="submit-btn" type="button" id="submit-btn">
                         Add book
                     </button>
                 </form>
