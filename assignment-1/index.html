@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Bookstore</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
-  </head>
-  <body>
+</head>
+
+<body>
+    <!-- Modal xác nhận xóa -->
+    <div id="deleteConfirmationModal" class="modal">
+        <div class="modal-content">
+            <h2>Xác nhận xóa</h2>
+            <p>Bạn có chắc chắn muốn xóa cuốn sách này?</p>
+            <button id="confirmDeleteButton">Xác nhận</button>
+            <button id="cancelDeleteButton">Hủy</button>
+        </div>
+    </div>
+
+
     <h1>Quản lý sách</h1>
 
     <!-- Ô tìm kiếm -->
-    
+
     <form id="search-book-form">
         <input type="text" id="search" placeholder="Tìm kiếm theo tiêu đề">
         <button type="submit">Tìm kiếm</button>
@@ -41,4 +54,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

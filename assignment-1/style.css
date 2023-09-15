@@ -1,10 +1,10 @@
 html {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 
 body {
-    background-color: #f0f0f0; /* Màu xám nhạt */
+    background-color: #f0f0f0;
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@ body {
 
 
 h1 {
-    color: #333; /* Màu đen đậm */
+    color: #333;
     text-align: center;
 }
 
@@ -21,20 +21,21 @@ table {
     width: 80%;
     margin: 20px auto;
     border-collapse: collapse;
-    background-color: #fff; /* Màu trắng */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Đổ bóng */
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-table th, table td {
+table th,
+table td {
     padding: 10px;
-    border: 1px solid #ddd; /* Màu xám nhạt cho viền */
+    border: 1px solid #ddd;
     text-align: left;
 }
 
-/
+
 h2 {
     text-align: center;
-    color: #333; /* Màu đen đậm */
+    color: #333;
 }
 
 #add-book-form {
@@ -43,21 +44,22 @@ h2 {
     text-align: center;
 }
 
-input[type="text"], button {
+input[type="text"],
+button {
     padding: 10px;
     margin: 5px;
-    border: 1px solid #ccc; /* Màu xám nhạt cho viền */
+    border: 1px solid #ccc;
     border-radius: 4px;
 }
 
 button {
-    background-color: #007BFF; /* Màu xanh da trời */
-    color: #fff; /* Màu trắng cho văn bản */
+    background-color: #007BFF;
+    color: #fff;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3; /* Màu xanh đậm khi hover */
+    background-color: #0056b3;
 }
 
 #search {
@@ -69,10 +71,53 @@ button:hover {
 
 
 button {
-    background-color: #ff3333; /* Màu đỏ */
-    color: #fff; /* Màu trắng cho văn bản */
+    background-color: #ff3333;
+    color: #fff;
 }
 
 button:hover {
-    background-color: #ff0000; /* Màu đỏ đậm khi hover */
+    background-color: #ff0000;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 20% auto;
+    padding: 20px;
+    width: 50%;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#confirmDeleteButton,
+#cancelDeleteButton {
+    margin: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#confirmDeleteButton {
+    background-color: #ff3333;
+    color: #fff;
+    border: none;
+}
+
+#confirmDeleteButton:hover {
+    background-color: #ff0000;
+}
+
+#cancelDeleteButton {
+    background-color: #ccc;
+    border: none;
 }
