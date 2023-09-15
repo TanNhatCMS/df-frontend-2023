@@ -12,13 +12,30 @@
     <!-- Modal xác nhận xóa -->
     <div id="deleteConfirmationModal" class="modal">
         <div class="modal-content">
-            <h2>Xác nhận xóa</h2>
-            <p>Bạn có chắc chắn muốn xóa cuốn sách này?</p>
-            <button id="confirmDeleteButton">Xác nhận</button>
-            <button id="cancelDeleteButton">Hủy</button>
+            <h2>Delete book</h2>
+            <p>Do you want to delete book?</p>
+            <button id="confirmDeleteButton">Delete</button>
+            <button id="cancelDeleteButton">Cancel</button>
         </div>
     </div>
 
+    <!-- Modal nhập sách mới -->
+    <div id="addBookModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeAddBookModal">&times;</span>
+            <h2 data-i18n="modalTitle">Add book</h2>
+            <form id="add-book-form">
+                <label for="name" data-i18n="nameLabel">Name</label>
+                <input type="text" id="name" required>
+                <label for="author" data-i18n="authorLabel">Author</label>
+                <input type="text" id="author" required>
+                <label for="topic" data-i18n="topicLabel">Topic</label>
+                <select id="topic" required>
+                </select>
+                <button data-i18n="addButton" type="submit">Create</button>
+            </form>
+        </div>
+    </div>
 
     <h1>Quản lý sách</h1>
 
@@ -32,10 +49,10 @@
     <table>
         <thead>
             <tr>
-                <th>Tiêu đề</th>
-                <th>Tác giả</th>
-                <th>Chủ đề</th>
-                <th>Thao tác</th>
+                <th><label for="title" data-i18n="titleLabel">Title</label></th>
+                <th><label for="author" data-i18n="authorLabel">Author</label></th>
+                <th><label for="topic" data-i18n="topicLabel">Topic</label></th>
+                <th><label for="topic" data-i18n="topicLabel">Action</label></th>
             </tr>
         </thead>
         <tbody id="book-list">
@@ -51,6 +68,11 @@
         <input type="text" id="topic" placeholder="Chủ đề" required><br>
         <button type="submit">Thêm</button>
     </form>
+
+    <div id="language-switcher">
+        <button id="english-button">English</button>
+        <button id="vietnamese-button">Tiếng Việt</button>
+    </div>
 
     <script src="script.js"></script>
 </body>

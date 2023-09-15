@@ -32,7 +32,6 @@ table td {
     text-align: left;
 }
 
-
 h2 {
     text-align: center;
     color: #333;
@@ -68,7 +67,6 @@ button:hover {
     margin: 20px auto;
     display: block;
 }
-
 
 button {
     background-color: #ff3333;
@@ -120,4 +118,29 @@ button:hover {
 #cancelDeleteButton {
     background-color: #ccc;
     border: none;
+}
+
+#closeAddBookModal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#add-book-form input {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#add-book-form button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+#closeAddBookModal:hover {
+    color: #ff0000;
 }
