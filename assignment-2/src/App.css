@@ -1,14 +1,64 @@
-.app-container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
+.App {
+  text-align: center;
   font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #000;
+  padding: 20px;
+  transition: background-color 0.3s;
 }
 
 
-.app-container.dark-mode {
-  background-color: #000;
+.App {
+  background-color: #fff;
+  color: #333;
+}
+
+
+.App.dark-mode {
+  background-color: #333;
   color: #fff;
+}
+
+
+.theme-toggle {
+  margin-bottom: 10px;
+}
+
+.theme-toggle button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.theme-toggle button:hover {
+  background-color: #0056b3;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+table th {
+  background-color: #f2f2f2;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+button.active {
+  background-color: #0056b3;
 }

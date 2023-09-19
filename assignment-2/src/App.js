@@ -1,96 +1,70 @@
+// App.js
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import Table from './Table';
+import Pagination from './Pagination';
 
 function App() {
-  // Trạng thái cho danh sách sách và trang hiện tại
-  const [books, setBooks] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [books, setBooks] = useState([]); // Danh sách 
+  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
+  const [booksPerPage] = useState(5); // Số sách trên mỗi trang
+  const [isDarkMode, setIsDarkMode] = useState(false); // Chế độ sáng/tối
 
-  // Sử dụng useEffect để khởi tạo dữ liệu từ localStorage khi component được tạo
   useEffect(() => {
-    const storedBooks = localStorage.getItem('books');
-    if (storedBooks) {
-      setBooks(JSON.parse(storedBooks));
-    }
+    // Load dữ liệu từ localStorage khi ứng dụng được tải lần đầu
+    const savedBooks = JSON.parse(localStorage.getItem('books')) || [];
+    setBooks(savedBooks);
   }, []);
 
-  // Sử dụng useEffect để lưu trữ danh sách sách vào localStorage khi có thay đổi
   useEffect(() => {
+    // Lưu trữ danh sách sách vào localStorage khi có thay đổi
     localStorage.setItem('books', JSON.stringify(books));
   }, [books]);
 
-  // Hàm xử lý tìm kiếm sách theo tiêu đề
-  const handleSearch = () => {
-    const filteredBooks = books.filter((book) =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    // Cập nhật danh sách sách đã lọc
-    // Có thể sử dụng setBooks(filteredBooks);
+  // Hàm thêm sách mới
+  const addBook = (book) => {
+    setBooks([...books, book]);
   };
 
-  // Hàm xử lý thêm bản ghi mới
-  const handleAddBook = (newBook) => {
-    // Tạo một bản ghi mới với thông tin từ biểu mẫu
-    const bookToAdd = {
-      id: Date.now(),
-      ...newBook,
-    };
-    // Cập nhật danh sách sách bằng cách thêm bản ghi mới vào đầu danh sách
-    setBooks([bookToAdd, ...books]);
-  };
-
-  // Hàm xử lý xóa bản ghi
-  const handleDelete = (id) => {
+  // Hàm xóa sách
+  const deleteBook = (id) => {
     const updatedBooks = books.filter((book) => book.id !== id);
-    // Cập nhật danh sách sách sau khi xóa
     setBooks(updatedBooks);
   };
 
-  // Logic phân trang
-  const itemsPerPage = 5;
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const displayedBooks = books.slice(startIndex, endIndex);
-
-  // Hàm xử lý thay đổi trang
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
+  // Hàm tìm kiếm sách theo tiêu đề
+  const searchBooks = (title) => {
+    const filteredBooks = books.filter((book) =>
+      book.title.toLowerCase().includes(title.toLowerCase())
+    );
+    setBooks(filteredBooks);
   };
 
+  // Hàm chuyển đổi giữa chế độ sáng và tối
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  // Tính toán sách được hiển thị trên trang hiện tại
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
+
   return (
-    <div className="app-container">
-      <h1>CMS Cửa hàng sách</h1>
-      <div className="search-container">
-        <input
-          type="text"
-          placeholder="Tìm kiếm theo tiêu đề"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button onClick={handleSearch}>Tìm kiếm</button>
+    <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
+      <div className="theme-toggle">
+        <button onClick={toggleDarkMode}>
+          {isDarkMode ? 'Chuyển sang Chế độ Sáng' : 'Chuyển sang Chế độ Tối'}
+        </button>
       </div>
-      <table className="book-table">
-        <thead>
-          <tr>
-            <th>Tên</th>
-            <th>Tác giả</th>
-            <th>Chủ đề</th>
-            <th>Thao tác</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* Dữ liệu sách được hiển thị ở đây */}
-        </tbody>
-      </table>
-      <div className="pagination-container">
-        {/* Nút phân trang */}
-      </div>
-      <div className="add-book-container">
-        <h2>Thêm Sách Mới</h2>
-        {/* Biểu mẫu thêm sách */}
-        <button onClick={handleAddBook}>Thêm Sách</button>
-      </div>
+      <h1>Quản lý Sách</h1>
+      <Table books={currentBooks} deleteBook={deleteBook} />
+      <Pagination
+        booksPerPage={booksPerPage}
+        totalBooks={books.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }
