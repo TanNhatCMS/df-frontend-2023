@@ -1,0 +1,14 @@
+.app-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+
+.app-container.dark-mode {
+  background-color: #000;
+  color: #fff;
+}
