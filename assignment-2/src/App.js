@@ -20,10 +20,35 @@ function App() {
   const toggleAddBookForm = () => {
     setIsAddingBook(!isAddingBook);
   };
+  // Dữ liệu sách mẫu
+  const sampleBooks = [
+    {
+      id: 1,
+      title: 'Refactoring',
+      author: 'Martin Fowler',
+    },
+    {
+      id: 2,
+      title: 'Design Data-Intensive Applications',
+      author: 'Martin Kleppman',
+    },
+    {
+      id: 3,
+      title: 'The Phoenix Project',
+      author: 'Gene Kim',
+    },
+  ];
+
   useEffect(() => {
-    // Lưu trữ danh sách sách vào localStorage khi có thay đổi
-    localStorage.setItem('books', JSON.stringify(books));
-  }, [books]);
+    // Load dữ liệu từ localStorage khi ứng dụng được tải lần đầu
+    const savedBooks = JSON.parse(localStorage.getItem('books')) || [];
+    // Nếu danh sách sách rỗng (lần đầu chạy), thêm dữ liệu sách mẫu
+    if (savedBooks.length === 0) {
+      setBooks(sampleBooks);
+    } else {
+      setBooks(savedBooks);
+    }
+  }, [sampleBooks]);
 
   // Hàm thêm sách mới
   const addBook = (book) => {
@@ -54,6 +79,7 @@ function App() {
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
+
   return (
     <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
       <div className="theme-toggle">
@@ -62,8 +88,8 @@ function App() {
         </button>
       </div>
       <h1>Quản lý Sách</h1>
-      <button onClick={toggleAddBookForm}>Thêm Sách</button> {/* Thêm nút Thêm sách */}
-      {isAddingBook && <AddBookForm addBook={addBook} />} {/* Hiển thị biểu mẫu khi cần */}
+      <button onClick={toggleAddBookForm}>Thêm Sách</button>
+      {isAddingBook && <AddBookForm addBook={addBook} />}
       <Table books={currentBooks} deleteBook={deleteBook} />
       <Pagination
         booksPerPage={booksPerPage}
