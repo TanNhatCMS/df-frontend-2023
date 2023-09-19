@@ -3,19 +3,23 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Table from './Table';
 import Pagination from './Pagination';
-
+import AddBookForm from './AddBookForm';
 function App() {
   const [books, setBooks] = useState([]); // Danh sách 
   const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
   const [booksPerPage] = useState(5); // Số sách trên mỗi trang
   const [isDarkMode, setIsDarkMode] = useState(false); // Chế độ sáng/tối
+  const [isAddingBook, setIsAddingBook] = useState(false);
 
   useEffect(() => {
     // Load dữ liệu từ localStorage khi ứng dụng được tải lần đầu
     const savedBooks = JSON.parse(localStorage.getItem('books')) || [];
     setBooks(savedBooks);
   }, []);
-
+  // Hàm mở hoặc đóng biểu mẫu thêm sách
+  const toggleAddBookForm = () => {
+    setIsAddingBook(!isAddingBook);
+  };
   useEffect(() => {
     // Lưu trữ danh sách sách vào localStorage khi có thay đổi
     localStorage.setItem('books', JSON.stringify(books));
@@ -58,6 +62,8 @@ function App() {
         </button>
       </div>
       <h1>Quản lý Sách</h1>
+      <button onClick={toggleAddBookForm}>Thêm Sách</button> {/* Thêm nút Thêm sách */}
+      {isAddingBook && <AddBookForm addBook={addBook} />} {/* Hiển thị biểu mẫu khi cần */}
       <Table books={currentBooks} deleteBook={deleteBook} />
       <Pagination
         booksPerPage={booksPerPage}
