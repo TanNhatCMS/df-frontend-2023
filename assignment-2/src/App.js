@@ -15,6 +15,7 @@ import {
   Form,
   message,
   Popconfirm,
+  Pagination,
 } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
@@ -30,6 +31,8 @@ function App() {
   const [booksFiltered, setBooksFiltered] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [books, setBooks] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 5;
 
 
   useEffect(() => {
@@ -250,7 +253,13 @@ function App() {
       })
     );
   };
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
 
+  const startIndex = (currentPage - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  const visibleBooks = books.slice(startIndex, endIndex);
   return (
     <ConfigProvider
       theme={{
@@ -329,6 +338,12 @@ function App() {
           </Button>
         </Space>
         <Table dataSource={tableData} columns={tableColumns} bordered />
+        <Pagination
+          current={currentPage}
+          total={books.length}
+          pageSize={pageSize}
+          onChange={handlePageChange}
+        />
       </Space.Compact>
       <Modal
         title='Add book'
