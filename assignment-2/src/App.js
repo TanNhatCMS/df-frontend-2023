@@ -16,9 +16,9 @@ import {
   message,
   Popconfirm,
   Pagination,
-  GlobalOutlined
+
 } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { UserOutlined, GlobalOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
 const languageOptions = {
