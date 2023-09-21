@@ -312,7 +312,7 @@ function App() {
         <Space
           style={{
             width: "100%",
-            justifyContent: "space-flex-end",
+            justifyContent: "flex-start",
             marginBottom: "20px",
           }}
         >
