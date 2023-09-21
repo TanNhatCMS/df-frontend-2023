@@ -440,28 +440,25 @@ formAddBook.addEventListener('submit', SubmitFormAddBook);
 searchInput.addEventListener('keyup', SearchBook);
 displayBooks(allBooks, currentPage);
 updateTextByLanguage();
-/*
-const themeToggle = document.getElementById("theme-toggle");
+
+const themeSwitch = document.getElementById("theme-switch");
 const body = document.body;
 
-const currentTheme = localStorage.getItem("theme");
-
-
-if (currentTheme) {
-    body.classList.add(currentTheme);
-    if (currentTheme === "dark-theme") {
-        themeToggle.textContent = "Light Mode";
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme) {
+    body.classList.add(savedTheme);
+    if (savedTheme === "dark-mode") {
+        themeSwitch.checked = true;
     }
 }
 
-themeToggle.addEventListener("click", () => {
-    if (body.classList.contains("dark-theme")) {
-        body.classList.remove("dark-theme");
-        themeToggle.textContent = "Dark Mode";
-        localStorage.setItem("theme", "light-theme");
+themeSwitch.addEventListener("change", () => {
+    if (body.classList.contains("dark-mode")) {
+        body.classList.remove("dark-mode");
+        localStorage.setItem("theme", "light-mode");
     } else {
-        body.classList.add("dark-theme");
-        themeToggle.textContent = "Light Mode";
-        localStorage.setItem("theme", "dark-theme");
+        body.classList.add("dark-mode");
+        localStorage.setItem("theme", "dark-mode");
     }
-});*/
+});
+
