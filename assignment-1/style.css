@@ -439,7 +439,6 @@ footer img {
     margin-left: .5em
 }
 
-
 .theme-toggle {
     display: flex;
     align-items: center;
@@ -488,10 +487,8 @@ footer img {
     transform: translateY(-50%);
 }
 
-
 body.dark-mode,
 body.dark-mode div.modal p,
-
 body.dark-mode div.modal h1,
 body.dark-mode div.modal label,
 body.dark-mode div.modal,
