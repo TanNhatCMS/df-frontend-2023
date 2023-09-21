@@ -301,7 +301,7 @@ function App() {
           </Text>
         </Space>
       </Space>
-      <Space.Compact
+      <Space
         direction='vertical'
         style={{
           width: "100%",
@@ -344,7 +344,7 @@ function App() {
           pageSize={pageSize}
           onChange={handlePageChange}
         />
-      </Space.Compact>
+      </Space>
       <Modal
         title='Add book'
         open={openModal}
