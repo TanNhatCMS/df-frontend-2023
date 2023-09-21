@@ -312,9 +312,8 @@ function App() {
         <Space
           style={{
             width: "100%",
-            justifyContent: "space-between",
+            justifyContent: "space-flex-end",
             marginBottom: "20px",
-            alignItems: "center"
           }}
         >
           <Select
