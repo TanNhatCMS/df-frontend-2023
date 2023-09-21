@@ -336,7 +336,7 @@ function App() {
             Add book
           </Button>
         </Space>
-        <Table dataSource={visibleBooks} columns={tableColumns} bordered />
+        <Table dataSource={visibleBooks} columns={tableColumns} bordered pagination={false} />
         <Pagination
           current={currentPage}
           total={books.length}
