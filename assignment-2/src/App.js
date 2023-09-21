@@ -37,6 +37,7 @@ function App() {
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [editingBook, setEditingBook] = useState(null);
   const pageSize = 5;
 
 
@@ -198,20 +199,30 @@ function App() {
       dataIndex: "action",
       key: "action",
       render: (_, record) => (
-        <Popconfirm
-          title='Delete book'
-          description='Are you sure to delete this book?'
-          onConfirm={() => handleDeleteBook(record.name)}
-          okText='Yes'
-          cancelText='No'
-        >
-          <Button type='text' danger>
-            Delete
+        <Space>
+          <Button type='text' onClick={() => handleEditBook(record)}>
+            Edit
           </Button>
-        </Popconfirm>
+          <Popconfirm
+            title='Delete book'
+            description='Are you sure to delete this book?'
+            onConfirm={() => handleDeleteBook(record.name)}
+            okText='Yes'
+            cancelText='No'
+          >
+            <Button type='text' danger>
+              Delete
+            </Button>
+          </Popconfirm>
+        </Space>
+
       ),
     },
   ];
+  const handleEditBook = (book) => {
+    setEditingBook(book);
+    setOpenModal(true);
+  };
   const handleLanguageChange = () => {
     setCurrentLanguage((prevLanguage) => (prevLanguage === "en" ? "vi" : "en"));
   };
@@ -223,10 +234,20 @@ function App() {
     setOpenModal(false);
   };
 
-  const handleAddBook = (newBook) => {
-    setBooks((oldBooks) => [...oldBooks, newBook]);
+  const handleAddBook = (formData) => {
+    if (editingBook) {
+      setBooks((oldBooks) =>
+        oldBooks.map((book) =>
+          book.name === editingBook.name ? { ...book, ...formData } : book
+        )
+      );
+      handleSuccessMessage("update");
+    } else {
+      setBooks((oldBooks) => [...oldBooks, formData]);
+      handleSuccessMessage("create");
+    }
+    handleCloseModal();
   };
-
   const handleDeleteBook = (name) => {
     setBooks((oldBooks) => oldBooks.filter((book) => book.name !== name));
   };
@@ -306,8 +327,6 @@ function App() {
           <Text style={{ fontSize: "14px", fontWeight: 500 }}>
             TânNhậtCMS
           </Text>
-        </Space>
-        <Space>
           <Button type="text" onClick={handleLanguageChange}>
             <GlobalOutlined />
             {languageOptions[currentLanguage]}
