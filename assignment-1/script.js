@@ -227,14 +227,10 @@ function updateTextByLanguage() {
         }
     });
 }
-
 let allBooks = GetBookStore();
 const itemsPerPage = 5;
-
 let totalPages = Math.ceil(allBooks.length / itemsPerPage);
-
 let currentPage = 1;
-
 
 function displayPageNumbers() {
     const pageNumbersContainer = document.querySelector("#pagination-numbers");
@@ -244,21 +240,21 @@ function displayPageNumbers() {
         const pageNumberButton = document.createElement('button');
         pageNumberButton.textContent = i;
         pageNumberButton.classList.add("pagination-number");
-
+        if (totalPages === 1) break;
         if (i === currentPage) {
             pageNumberButton.classList.add("active");
         }
 
         pageNumberButton.addEventListener("click", function () {
             currentPage = i;
-            displayBooks(currentPage, allBooks);
+            displayBooks(allBooks, currentPage);
         });
 
         pageNumbersContainer.appendChild(pageNumberButton);
     }
 }
 
-function displayBooks(page, bookList) {
+function displayBooks(bookList, page = 1) {
     totalPages = Math.ceil(bookList.length / itemsPerPage);
     const startIndex = (page - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -280,13 +276,10 @@ function displayBooks(page, bookList) {
         `;
         tbody.appendChild(newRow);
     });
-
-
     const prevPageButton = document.getElementById("prev-page");
     if (prevPageButton && prevPageButton.parentNode) {
         prevPageButton.parentNode.removeChild(prevPageButton);
     }
-
     const nextPageButton = document.getElementById("next-page");
     if (nextPageButton && nextPageButton.parentNode) {
         nextPageButton.parentNode.removeChild(nextPageButton);
@@ -314,37 +307,15 @@ function createPaginationButton(text, id) {
 document.addEventListener("click", function (event) {
     if (event.target.id === "prev-page" && currentPage > 1) {
         currentPage--;
-        displayBooks(currentPage, allBooks);
+        displayBooks(allBooks, currentPage);
     } else if (event.target.id === "next-page" && currentPage < totalPages) {
         currentPage++;
-        displayBooks(currentPage, allBooks);
+        displayBooks(allBooks, currentPage);
     }
 });
-const tableContainer = document.querySelector(".pagination-container");
+const paginationContainer = document.querySelector(".pagination-container");
 const nextPageButton = createPaginationButton(">", "next-page");
-tableContainer.appendChild(nextPageButton);
-
-displayBooks(currentPage, allBooks);
-
-const RenderBookList = (bookList) => {
-    const tbody = document.querySelector("#table-book tbody");
-    tbody.innerHTML = '';
-    bookList.forEach((book, index) => {
-        const newRow = document.createElement('tr');
-        newRow.classList.add('book-item');
-        newRow.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${book.name}</td>
-        <td>${book.author}</td>
-        <td>${book.topic}</td>
-        <td>
-            <a data-i18n="editButton" id="edit-book" onclick="OpenEditModal(${book.id},'${book.name}','${book.author}','${book.topic}')" class="edit-book">Edit</a>
-            <a data-i18n="deleteButton" id="delete-book" onclick="OpenDeleteModal(${book.id}, '${book.name}')" class="delete-book">Delete</a>
-        </td>
-    `;
-        tbody.appendChild(newRow);
-    });
-};
+paginationContainer.appendChild(nextPageButton);
 const inputNames = document.querySelector('#names');
 const inputAuthors = document.querySelector('#authors');
 const selectTopics = document.querySelector('#topics');
@@ -382,7 +353,8 @@ const SubmitFormEditBook = (e) => {
         return item;
     });
     SaveBookStore(bookList);
-    RenderBookList(bookList);
+    allBooks = bookList;
+    displayBooks(bookList);
     inputNames.value = '';
     inputAuthors.value = '';
     CloseEditModal();
@@ -391,7 +363,9 @@ let idBookToDelete;
 const DeleteBook = (id) => {
     const updatedBookList = GetBookStore().filter(item => item.id !== idBookToDelete);
     SaveBookStore(updatedBookList);
-    RenderBookList(updatedBookList);
+    allBooks = updatedBookList;
+    currentPage = 1;
+    displayBooks(updatedBookList);
 };
 const OpenDeleteModal = (id, name) => {
     deleteModal.classList.add('active-modal');
@@ -418,10 +392,11 @@ const SearchBook = (event) => {
             filter.push(book);
         }
     });
+    currentPage = 1;
     if (searchValue) {
-        RenderBookList(filter);
+        displayBooks(filter);
     } else {
-        RenderBookList(GetBookStore());
+        displayBooks(GetBookStore());
     }
 };
 
@@ -435,7 +410,9 @@ const SubmitFormAddBook = (e) => {
     };
     const newListBook = [...GetBookStore(), formValue];
     SaveBookStore(newListBook);
-    RenderBookList(newListBook);
+    allBooks = newListBook;
+    currentPage = 1;
+    displayBooks(newListBook);
     inputName.value = '';
     inputAuthor.value = '';
     addModalContainer.classList.remove('active-modal');
@@ -461,6 +438,7 @@ closeDeleteModalButton.addEventListener('click', hideDeleteModal);
 formEditBook.addEventListener('submit', SubmitFormEditBook);
 formAddBook.addEventListener('submit', SubmitFormAddBook);
 searchInput.addEventListener('keyup', SearchBook);
+displayBooks(allBooks, currentPage);
 updateTextByLanguage();
 /*
 const themeToggle = document.getElementById("theme-toggle");
