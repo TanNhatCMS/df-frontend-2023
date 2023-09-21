@@ -309,10 +309,10 @@ function App() {
           backgroundColor: isDarkMode ? "rgb(36,37,38)" : "white",
         }}
       >
-        <Space
+        <Space.Compact
           style={{
             width: "100%",
-            justifyContent: "flex-start",
+            justifyContent: "space-between",
             marginBottom: "20px",
           }}
         >
@@ -335,14 +335,16 @@ function App() {
           >
             Add book
           </Button>
-        </Space>
-        <Table dataSource={visibleBooks} columns={tableColumns} bordered pagination={false} />
-        <Pagination
-          current={currentPage}
-          total={books.length}
-          pageSize={pageSize}
-          onChange={handlePageChange}
-        />
+        </Space.Compact>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Table dataSource={visibleBooks} columns={tableColumns} bordered pagination={false} />
+          <Pagination
+            current={currentPage}
+            total={books.length}
+            pageSize={pageSize}
+            onChange={handlePageChange}
+          />
+        </div>
       </Space>
       <Modal
         title='Add book'
@@ -397,7 +399,7 @@ function App() {
           </Form.Item>
         </Form>
       </Modal>
-    </ConfigProvider>
+    </ConfigProvider >
   );
 }
 
