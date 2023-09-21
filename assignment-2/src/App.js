@@ -336,8 +336,9 @@ function App() {
             Add book
           </Button>
         </Space.Compact>
-        <div style={{ display: "flex" }}>
-          <Table dataSource={visibleBooks} columns={tableColumns} bordered pagination={false} />
+
+        <Table dataSource={visibleBooks} columns={tableColumns} bordered pagination={false} />
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <Pagination
             current={currentPage}
             total={books.length}
