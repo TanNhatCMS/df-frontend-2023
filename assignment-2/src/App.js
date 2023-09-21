@@ -336,7 +336,7 @@ function App() {
             Add book
           </Button>
         </Space.Compact>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={{ display: "flex" }}>
           <Table dataSource={visibleBooks} columns={tableColumns} bordered pagination={false} />
           <Pagination
             current={currentPage}
