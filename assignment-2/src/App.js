@@ -20,18 +20,22 @@ import {
 import { UserOutlined } from "@ant-design/icons";
 
 const { Title, Text } = Typography;
+const languageOptions = {
+  en: "English",
+  vi: "Tiếng Việt",
+};
 
 function App() {
   const { defaultAlgorithm, darkAlgorithm } = theme;
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
-
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [booksFiltered, setBooksFiltered] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [books, setBooks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentLanguage, setCurrentLanguage] = useState("en");
   const pageSize = 5;
 
 
@@ -207,7 +211,9 @@ function App() {
       ),
     },
   ];
-
+  const handleLanguageChange = () => {
+    setCurrentLanguage((prevLanguage) => (prevLanguage === "en" ? "vi" : "en"));
+  };
   const handleSwitchTheme = () => {
     setIsDarkMode((previousValue) => !previousValue);
   };
@@ -243,6 +249,7 @@ function App() {
       })
     );
   };
+
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -299,6 +306,12 @@ function App() {
             TânNhậtCMS
           </Text>
         </Space>
+        <Space>
+          <Button type="text" onClick={handleLanguageChange}>
+            <GlobalOutlined />
+            {languageOptions[currentLanguage]}
+          </Button>
+        </Space>
       </Space>
       <Space
         direction='vertical'
@@ -333,7 +346,7 @@ function App() {
               setOpenModal(true);
             }}
           >
-            Add book
+            {currentLanguage === "en" ? "Add book" : "Thêm Sách"}
           </Button>
         </Space.Compact>
 
