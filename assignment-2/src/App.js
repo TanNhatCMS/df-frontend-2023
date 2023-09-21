@@ -208,16 +208,6 @@ function App() {
     },
   ];
 
-  const tableData = books.map((book, i) => {
-    return {
-      key: i,
-      name: book.name,
-      author: book.author,
-      topic: book.topic,
-      action: "Delete",
-    };
-  });
-
   const handleSwitchTheme = () => {
     setIsDarkMode((previousValue) => !previousValue);
   };
@@ -259,6 +249,15 @@ function App() {
 
   const startIndex = (currentPage - 1) * pageSize;
   const endIndex = startIndex + pageSize;
+  const tableData = books.map((book, i) => {
+    return {
+      key: i,
+      name: book.name,
+      author: book.author,
+      topic: book.topic,
+      action: "Delete",
+    };
+  });
   const visibleBooks = books.slice(startIndex, endIndex);
   return (
     <ConfigProvider
@@ -315,6 +314,7 @@ function App() {
             width: "100%",
             justifyContent: "space-between",
             marginBottom: "20px",
+            alignItems: "center"
           }}
         >
           <Select
