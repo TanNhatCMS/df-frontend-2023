@@ -178,8 +178,9 @@ function App() {
           width: "100%",
           padding: "6px 12px",
           justifyContent: "space-between",
-          borderBottom: `1px solid ${isDarkMode ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)"
-            }`,
+          borderBottom: `1px solid ${
+            isDarkMode ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)"
+          }`,
           backgroundColor: isDarkMode ? "rgb(36,37,38)" : "white",
         }}
       >
