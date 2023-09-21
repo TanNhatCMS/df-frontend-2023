@@ -1,29 +1,37 @@
-// Table.js
 import React from 'react';
 
-const Table = ({ books, deleteBook }) => {
+function Table({ bookList, onDeleteClick, onEditClick }) {
     return (
-        <table>
+        <table className="table">
             <thead>
                 <tr>
-                    <th>Tiêu đề</th>
-                    <th>Tác giả</th>
-                    <th>Thao tác</th>
+                    <th className="column">Title</th>
+                    <th className="column">Author</th>
+                    <th className="column">Genre</th>
+                    <th className="column">Year</th>
+                    <th className="column">Actions</th>
                 </tr>
             </thead>
             <tbody>
-                {books.map((book) => (
-                    <tr key={book.id}>
+                {bookList.map((book, index) => (
+                    <tr key={index}>
                         <td>{book.title}</td>
                         <td>{book.author}</td>
+                        <td>{book.genre}</td>
+                        <td>{book.year}</td>
                         <td>
-                            <button onClick={() => deleteBook(book.id)}>Xóa</button>
+                            <span className="edit-book" onClick={() => onEditClick(index)}>
+                                Edit
+                            </span>
+                            <span className="delete-book" onClick={() => onDeleteClick(index)}>
+                                Delete
+                            </span>
                         </td>
                     </tr>
                 ))}
             </tbody>
         </table>
     );
-};
+}
 
 export default Table;

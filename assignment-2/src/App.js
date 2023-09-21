@@ -1,101 +1,83 @@
-// App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import Header from './Header';
 import Table from './Table';
-import Pagination from './Pagination';
-import AddBookForm from './AddBookForm';
+import Footer from './Footer';
+import Modal from './Modal';
+import ModalAddEdit from './ModalAddEdit';
+
 function App() {
-  const [books, setBooks] = useState([]); // Danh sách 
-  const [currentPage, setCurrentPage] = useState(1); // Trang hiện tại
-  const [booksPerPage] = useState(5); // Số sách trên mỗi trang
-  const [isDarkMode, setIsDarkMode] = useState(false); // Chế độ sáng/tối
-  const [isAddingBook, setIsAddingBook] = useState(false);
+  const [bookList, setBookList] = useState([]); // Quản lý danh sách sách
+  const [isAddModalOpen, setAddModalOpen] = useState(false); // Trạng thái hiển thị modal thêm sách
+  const [isEditModalOpen, setEditModalOpen] = useState(false); // Trạng thái hiển thị modal sửa sách
+  const [selectedBookIndex, setSelectedBookIndex] = useState(-1); // Index sách đang được sửa
+  const [currentLanguage, setCurrentLanguage] = useState('en'); // Ngôn ngữ hiện tại
+  const [currentTheme, setCurrentTheme] = useState('light-mode'); // Chế độ sáng/tối
 
-  useEffect(() => {
-    // Load dữ liệu từ localStorage khi ứng dụng được tải lần đầu
-    const savedBooks = JSON.parse(localStorage.getItem('books')) || [];
-    setBooks(savedBooks);
-  }, []);
-  // Hàm mở hoặc đóng biểu mẫu thêm sách
-  const toggleAddBookForm = () => {
-    setIsAddingBook(!isAddingBook);
+  // Hàm thay đổi ngôn ngữ
+  const handleLanguageChange = () => {
+    setCurrentLanguage(currentLanguage === 'en' ? 'vi' : 'en');
   };
-  // Dữ liệu sách mẫu
-  const sampleBooks = [
-    {
-      id: 1,
-      title: 'Refactoring',
-      author: 'Martin Fowler',
-    },
-    {
-      id: 2,
-      title: 'Design Data-Intensive Applications',
-      author: 'Martin Kleppman',
-    },
-    {
-      id: 3,
-      title: 'The Phoenix Project',
-      author: 'Gene Kim',
-    },
-  ];
 
-  useEffect(() => {
-    // Load dữ liệu từ localStorage khi ứng dụng được tải lần đầu
-    const savedBooks = JSON.parse(localStorage.getItem('books')) || [];
-    // Nếu danh sách sách rỗng (lần đầu chạy), thêm dữ liệu sách mẫu
-    if (savedBooks.length === 0) {
-      setBooks(sampleBooks);
-    } else {
-      setBooks(savedBooks);
-    }
-  }, [sampleBooks]);
+  // Hàm thay đổi chế độ sáng/tối
+  const handleThemeChange = () => {
+    setCurrentTheme(currentTheme === 'light-mode' ? 'dark-mode' : 'light-mode');
+  };
 
   // Hàm thêm sách mới
-  const addBook = (book) => {
-    setBooks([...books, book]);
+  const handleAddBook = (e, formData) => {
+    e.preventDefault();
+    setBookList([...bookList, formData]);
+    setAddModalOpen(false);
+  };
+
+  // Hàm sửa sách
+  const handleEditBook = (e, formData) => {
+    e.preventDefault();
+    const updatedBookList = [...bookList];
+    updatedBookList[selectedBookIndex] = formData;
+    setBookList(updatedBookList);
+    setEditModalOpen(false);
+    setSelectedBookIndex(-1);
   };
 
   // Hàm xóa sách
-  const deleteBook = (id) => {
-    const updatedBooks = books.filter((book) => book.id !== id);
-    setBooks(updatedBooks);
+  const handleDeleteBook = (index) => {
+    const updatedBookList = [...bookList];
+    updatedBookList.splice(index, 1);
+    setBookList(updatedBookList);
   };
-
-  // Hàm tìm kiếm sách theo tiêu đề
-  const searchBooks = (title) => {
-    const filteredBooks = books.filter((book) =>
-      book.title.toLowerCase().includes(title.toLowerCase())
-    );
-    setBooks(filteredBooks);
-  };
-
-  // Hàm chuyển đổi giữa chế độ sáng và tối
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
-  // Tính toán sách được hiển thị trên trang hiện tại
-  const indexOfLastBook = currentPage * booksPerPage;
-  const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
-
 
   return (
-    <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
-      <div className="theme-toggle">
-        <button onClick={toggleDarkMode}>
-          {isDarkMode ? 'Chuyển sang Chế độ Sáng' : 'Chuyển sang Chế độ Tối'}
+    <div className={`App ${currentTheme}`}>
+      <Header onLanguageChange={handleLanguageChange} onThemeChange={handleThemeChange} />
+      <main>
+        <button className="add-button" onClick={() => setAddModalOpen(true)}>
+          Add Book
         </button>
-      </div>
-      <h1>Quản lý Sách</h1>
-      <button onClick={toggleAddBookForm}>Thêm Sách</button>
-      {isAddingBook && <AddBookForm addBook={addBook} />}
-      <Table books={currentBooks} deleteBook={deleteBook} />
-      <Pagination
-        booksPerPage={booksPerPage}
-        totalBooks={books.length}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+        <Table
+          bookList={bookList}
+          onDeleteClick={handleDeleteBook}
+          onEditClick={(index) => {
+            setSelectedBookIndex(index);
+            setEditModalOpen(true);
+          }}
+        />
+      </main>
+      <Footer />
+      {/* Modal thêm sách */}
+      <ModalAddEdit
+        isOpen={isAddModalOpen}
+        onClose={() => setAddModalOpen(false)}
+        onSave={handleAddBook}
+        book={null}
+      />
+      {/* Modal sửa sách */}
+      <ModalAddEdit
+        isOpen={isEditModalOpen}
+        onClose={() => setEditModalOpen(false)}
+        onSave={handleEditBook}
+        book={selectedBookIndex !== -1 ? bookList[selectedBookIndex] : null}
       />
     </div>
   );
