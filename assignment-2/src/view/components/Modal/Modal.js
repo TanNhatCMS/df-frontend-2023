@@ -16,7 +16,7 @@ const Modal = ({ handleToggleModal, title, children }) => {
             <span>{title}</span>
           </div>
           <div className={styles["header-btn"]} onClick={handleToggleModal}>
-            <i className="fa-solid fa-xmark"></i>
+            X
           </div>
         </div>
         <>{children}</>

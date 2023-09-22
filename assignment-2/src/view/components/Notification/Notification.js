@@ -1,36 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Notification.module.css';
 
 function Notification() {
-    const [isVisible, setIsVisible] = useState(false);
-    const [message, setMessage] = useState('');
-    const [isError, setIsError] = useState(false);
+    const [notification, setNotification] = useState(null);
+
+    useEffect(() => {
+        if (notification) {
+            setTimeout(() => {
+                setNotification(null);
+            }, 3000);
+        }
+    }, [notification]);
 
     Notification.showSuccessNotification = (message) => {
-        setMessage(message);
-        setIsVisible(true);
-        setIsError(false);
-
-        setTimeout(() => {
-            setIsVisible(false);
-        }, 3000);
+        setNotification({ message, isError: false });
     };
 
     Notification.showErrorNotification = (message) => {
-        setMessage(message);
-        setIsVisible(true);
-        setIsError(true);
-
-        setTimeout(() => {
-            setIsVisible(false);
-        }, 3000);
+        setNotification({ message, isError: true });
     };
 
     return (
         <div>
-            {isVisible && (
-                <div className={`${styles["notification"]} ${isError ? styles["error"] : styles["success"]}`}>
-                    {message}
+            {notification && (
+                <div className={`${styles["notification"]} ${notification.isError ? styles["error"] : styles["success"]}`}>
+                    {notification.message}
                 </div>
             )}
         </div>

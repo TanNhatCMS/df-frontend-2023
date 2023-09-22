@@ -61,7 +61,6 @@ function App() {
         setDataBooksShow(localDataBooks);
       }
       await new Promise((r) => setTimeout(r, 800));
-      setIsLoading(false);
     };
     setUp();
 
@@ -109,10 +108,23 @@ function App() {
     }
     setIsShowModalDelete(!isShowModalDelete);
   };
-
+  const CheckInput = (book) => {
+    if (!book.name) {
+      Notification.showErrorNotification("Please enter book name");
+      return true;
+    }
+    if (!book.author) {
+      Notification.showErrorNotification("Please enter book author");
+      return true;
+    }
+    if (!book.topic) {
+      Notification.showErrorNotification("Please enter book topic");
+      return true;
+    }
+    return false;
+  }
   const handleCreateBook = (book) => {
-    if (!book.name || !book.author || !book.topic) {
-      Notification.showErrorNotification("Vui lòng điền đầy đủ thông tin sách.");
+    if (CheckInput(book)) {
       return;
     }
     const newDataBook = [
@@ -126,13 +138,12 @@ function App() {
     setDataBooks(newDataBook);
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));
-    Notification.showNotification("Create success");
+    Notification.showSuccessNotification("Create success");
     handleToggleCreateModal();
   };
 
   const handleEditBook = (book) => {
-    if (!book.name || !book.author || !book.topic) {
-      Notification.showErrorNotification("Vui lòng điền đầy đủ thông tin sách.");
+    if (CheckInput(book)) {
       return;
     }
     const newDataBook = dataBooks.map((item) => {
@@ -141,11 +152,10 @@ function App() {
       }
       return item;
     });
-
     setDataBooks(newDataBook);
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));
-    Notification.showNotification("Edit success");
+    Notification.showSuccessNotification("Edit success");
     handleToggleEditModal();
   };
 
@@ -157,7 +167,7 @@ function App() {
     setDataBooks(newDataBook);
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));
-    Notification.showNotification("Delete success");
+    Notification.showSuccessNotification("Delete success");
     handleToggleDeleteModal();
   };
 
@@ -204,7 +214,6 @@ function App() {
                 id="input__name"
                 type="text"
                 name="name"
-                title="Please enter book name"
                 placeholder="Enter book's name ..."
                 autoComplete="on"
                 value={newBook.name}
@@ -217,7 +226,6 @@ function App() {
                 id="input__author"
                 type="text"
                 name="author"
-                title="Please enter author name"
                 placeholder="Enter book's author ..."
                 autoComplete="on"
                 value={newBook.author}
@@ -229,7 +237,6 @@ function App() {
               <select
                 id="input__topic"
                 name="topic"
-                title="Please select book's topic"
                 value={newBook.topic}
                 onChange={(event) =>
                   setNewBook({ ...newBook, topic: event.target.value })
@@ -285,7 +292,6 @@ function App() {
                 name="author"
                 placeholder="Enter book's author ..."
                 autoComplete="on"
-                title="Please enter author name"
                 value={currentBookEdit.author}
                 onChange={(event) =>
                   setCurrentBookEdit({

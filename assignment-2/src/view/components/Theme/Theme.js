@@ -1,5 +1,4 @@
-// import { useState } from "react";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import styles from "./Theme.module.css";
 
@@ -9,24 +8,25 @@ const Theme = () => {
   const handleSwitchTheme = () => {
     if (theme === "light") {
       setTheme("dark");
-      localStorage.setItem("theme-store", "dark");
+      localStorage.setItem("theme", "dark");
     } else {
       setTheme("light");
-      localStorage.setItem("theme-store", "light");
+      localStorage.setItem("theme", "light");
     }
   };
+  useEffect(() => {
+    document.body.className = theme === "light" ? "light-theme" : "dark-theme";
+  }, [theme]);
 
   return (
     <div className={`${styles["theme"]}`}>
-      <div
-        className={`${styles["theme-btn"]}`}
-        onClick={handleSwitchTheme}
-      >
-        {theme === "dark" && <i className="fa-solid fa-toggle-off"></i>}
-        {!(theme === "dark") && <i className="fa-solid fa-toggle-on"></i>}
-      </div>
+      <label className={styles["switch"]}>
+        <input type="checkbox" onClick={handleSwitchTheme} />
+        <span className={styles["slider"]}></span>
+      </label>
       <span>{theme === "light" ? "Light" : "Dark"} Mode</span>
     </div>
+
   );
 };
 
