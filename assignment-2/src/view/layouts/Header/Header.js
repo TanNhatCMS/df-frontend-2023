@@ -2,8 +2,8 @@ import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import Theme from "../../components/Theme/Theme";
 import Account from "../../components/Account/Account";
-import "./Header.module.css";
-
+import "./Header.css";
+import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher';
 const Header = ({ currentLanguage, onLanguageChange }) => {
   const { theme } = useContext(ThemeContext);
 
@@ -12,7 +12,9 @@ const Header = ({ currentLanguage, onLanguageChange }) => {
       <div className="header-logo">
         <a href="/">Bookstore</a>
       </div>
+
       <div className="header-actions">
+        <LanguageSwitcher currentLanguage={currentLanguage} onLanguageChange={onLanguageChange} />
         <Theme />
         <Account currentLanguage={currentLanguage} onLanguageChange={onLanguageChange} />
       </div>

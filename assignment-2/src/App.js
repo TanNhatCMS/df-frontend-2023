@@ -6,6 +6,7 @@ import Modal from "./view/components/Modal/Modal";
 import Notification from './view/components/Notification/Notification';
 import initialDataBooks from "./database/book-store";
 import { ThemeContext } from "./view/contexts/ThemeContext";
+import { translations } from "./view/components/LanguageSwitcher/LanguageSwitcher";
 import "./App.css";
 import { useEffect, useState } from "react";
 
@@ -188,7 +189,7 @@ function App() {
       <Main currentLanguage={currentLanguage} onLanguageChange={handleLanguageChange}>
         <div className={`store-actions row row-end theme-${theme}`}>
           <Search onChangeKeyword={handleSearch} />
-          <Button title="Add book" handleClick={handleToggleCreateModal} />
+          <Button title={currentLanguage === "en" ? translations.en.addbook : translations.vi.addbook} handleClick={handleToggleCreateModal} />
         </div>
         <div className={`store-data row theme-${theme}`}>
           <Table
@@ -256,7 +257,7 @@ function App() {
           <div className="modal-footer">
             <div className="footer__action">
               <Button
-                title="Create"
+                title={currentLanguage === "en" ? translations.en.create : translations.vi.create}
                 handleClick={() => handleCreateBook(newBook)}
               ></Button>
             </div>

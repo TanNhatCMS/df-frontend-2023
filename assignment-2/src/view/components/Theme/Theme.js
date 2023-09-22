@@ -14,9 +14,6 @@ const Theme = () => {
       localStorage.setItem("theme", "light");
     }
   };
-  useEffect(() => {
-    document.body.className = theme === "light" ? "light-theme" : "dark-theme";
-  }, [theme]);
 
   return (
     <div className={`${styles["theme"]}`}>
