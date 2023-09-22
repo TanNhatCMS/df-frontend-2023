@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Notification.module.css';
+import styles from './Notification.module.css';
 
 function Notification() {
     const [isVisible, setIsVisible] = useState(false);
@@ -17,7 +17,7 @@ function Notification() {
     return (
         <div>
             {isVisible && (
-                <div className="notification">
+                <div className={`${styles["notification"]}`}>
                     {message}
                 </div>
             )}
