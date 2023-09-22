@@ -1,8 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import styles from "./Account.module.css";
-import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
-const Account = ({ currentLanguage, onLanguageChange }) => {
+const Account = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <div className={`${styles["account"]} ${styles[`theme-${theme}`]}`}>
@@ -12,7 +11,7 @@ const Account = ({ currentLanguage, onLanguageChange }) => {
       <div className="account-name">
         <span>TânNhậtCMS</span>
       </div>
-      <LanguageSwitcher currentLanguage={currentLanguage} onLanguageChange={onLanguageChange} />
+
     </div>
   );
 };
