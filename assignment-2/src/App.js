@@ -1,11 +1,11 @@
-import Main from "./Main/Main";
-import Search from "./Search/Search";
-import Button from "./Button/Button";
-import Table from "./Table/Table";
-import Modal from "./Modal/Modal";
-import Notification from './Notification/Notification';
+import Main from "./view/layouts/Main/Main";
+import Search from "./view/components/Search/Search";
+import Button from "./view/components/Button/Button";
+import Table from "./view/components/Table/Table";
+import Modal from "./view/components/Modal/Modal";
+import Notification from './view/components/Notification/Notification';
 import initialDataBooks from "./database/book-store";
-import { ThemeContext } from "./ThemeContext";
+import { ThemeContext } from "./view/contexts/ThemeContext";
 import "./App.css";
 import { useEffect, useState } from "react";
 

@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { ThemeContext } from "../ThemeContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import Pagination from "../Pagination/Pagination";
 import styles from "./Table.module.css";
 

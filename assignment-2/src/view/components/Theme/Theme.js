@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import { useContext } from "react";
-import { ThemeContext } from "../ThemeContext";
+import { ThemeContext } from "../../contexts/ThemeContext";
 import styles from "./Theme.module.css";
 
 const Theme = () => {
