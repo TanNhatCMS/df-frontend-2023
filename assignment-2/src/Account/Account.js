@@ -6,8 +6,8 @@ const Account = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <div className={`${styles["account"]} ${styles[`theme-${theme}`]}`}>
-      <img class="account-avatar" src="./assets/images/user.png" alt="Avatar người dùng" />
-      <h1 class="account-name">Tân Nhật CMS</h1>
+      <img className="account-avatar" src="./assets/images/user.png" alt="Avatar người dùng" />
+      <h1 className="account-name">Tân Nhật CMS</h1>
     </div>
   );
 };
