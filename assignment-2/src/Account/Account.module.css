@@ -5,7 +5,7 @@
     background-color: transparent;
 }
 
-.account-avatar {
+.account .account-avatar {
     width: 40px;
     height: 40px;
     background-color: #e2e8ec;
@@ -13,7 +13,7 @@
     object-fit: cover;
 }
 
-.account-name {
+.account .account-name {
     font-size: 12px;
     font-weight: 500;
 }
