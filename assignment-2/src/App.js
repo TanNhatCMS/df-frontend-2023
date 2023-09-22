@@ -6,7 +6,6 @@ import Modal from "./Modal/Modal";
 import Notification from './Notification/Notification';
 import initialDataBooks from "./database/book-store";
 import { ThemeContext } from "./ThemeContext";
-import Main from "./Main";
 import "./App.css";
 import { useEffect, useState } from "react";
 
