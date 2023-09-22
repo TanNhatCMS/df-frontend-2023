@@ -6,7 +6,7 @@ import Modal from "./Modal/Modal";
 import Notification from './Notification/Notification';
 import initialDataBooks from "./database/book-store";
 import { ThemeContext } from "./ThemeContext";
-import Header from "./Header/Header";
+import Main from "./Main";
 import "./App.css";
 import { useEffect, useState } from "react";
 
@@ -176,8 +176,8 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <Notification />
-      <Header currentLanguage={currentLanguage} onLanguageChange={handleLanguageChange}></Header>
-      <Main>
+
+      <Main currentLanguage={currentLanguage} onLanguageChange={handleLanguageChange}>
         <div className={`store-actions row row-end theme-${theme}`}>
           <Search onChangeKeyword={handleSearch} />
           <Button title="Add book" handleClick={handleToggleCreateModal} />
