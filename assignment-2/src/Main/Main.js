@@ -7,7 +7,7 @@ const Main = ({ currentLanguage, onLanguageChange, children }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <> <Header currentLanguage={currentLanguage} onLanguageChange={onLanguageChange} />
+    <> <Header currentLanguage={currentLanguage} onLanguageChange={onLanguageChange} ></Header>
       <main id="main" className={`theme-${theme}`}>
         {children}
       </main>
