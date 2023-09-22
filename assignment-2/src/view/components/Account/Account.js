@@ -6,8 +6,12 @@ const Account = ({ currentLanguage, onLanguageChange }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <div className={`${styles["account"]} ${styles[`theme-${theme}`]}`}>
-      <img className="account-avatar" src="./assets/images/user.png" alt="Avatar người dùng" />
-      <h1 className="account-name">Tân Nhật CMS</h1>
+      <div className="account-image">
+        <img className="account-avatar" src="./assets/images/user.png" alt="Avatar người dùng" />
+      </div>
+      <div className="account-name">
+        <span>TânNhậtCMS</span>
+      </div>
       <LanguageSwitcher currentLanguage={currentLanguage} onLanguageChange={onLanguageChange} />
     </div>
   );

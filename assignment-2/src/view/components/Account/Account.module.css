@@ -1,8 +1,15 @@
 .account,
 .account div,
 .account img,
-.account h1 {
+.account span {
     background-color: transparent;
+}
+
+.account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
 }
 
 .account img {
@@ -11,18 +18,8 @@
     background-color: #e2e8ec;
     border-radius: 50%;
     object-fit: cover;
-}
-
-.account h1 {
-    font-size: 12px;
-    font-weight: 500;
-}
-
-.account {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 8px;
+    font-size: 32px;
+    color: gray;
 }
 
 .account.theme-dark i {
