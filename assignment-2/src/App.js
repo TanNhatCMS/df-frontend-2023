@@ -3,6 +3,7 @@ import Search from "./Search/Search";
 import Button from "./Button/Button";
 import Table from "./Table/Table";
 import Modal from "./Modal/Modal";
+import Notification from './Notification';
 import initialDataBooks from "./database/book-store";
 import { ThemeContext } from "./ThemeContext";
 import { currentLanguage, setCurrentLanguage } from "./Language/Language";
@@ -23,7 +24,7 @@ function App() {
   const [currentBookEdit, setCurrentBookEdit] = useState({});
   const [currentBookDelete, setCurrentBookDelete] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [messageApi, contextHolder] = message.useMessage();
+
 
   useEffect(() => {
     const setUp = async () => {
@@ -167,17 +168,9 @@ function App() {
     localStorage.setItem("page", "1");
   };
 
-
-  useEffect(() => {
-    localStorage.setItem("books", JSON.stringify(books));
-  }, [books]);
   const handleSuccessMessage = (action) => {
-    const content =
-      action === "create" ? "Create" : action === "delete" ? "Delete" : "";
-    messageApi.open({
-      type: "success",
-      content: `${content} success`,
-    });
+    const content = action === "create" ? "Create" : action === "delete" ? "Delete" : "";
+    Notification.showNotification(`${content} success`);
   };
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -194,7 +187,7 @@ function App() {
             data={dataBooksShow}
             handleActions={[
               setCurrentPage,
-              handleToggleUpdateModal,
+              handleToggleEditModal,
               handleToggleDeleteModal,
             ]}
           />
@@ -372,8 +365,6 @@ function App() {
           </div>
         </Modal>
       )}
-
-      {isLoading && <Loading />}
     </ThemeContext.Provider>
   );
 }

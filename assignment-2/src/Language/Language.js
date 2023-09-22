@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ThemeContext } from "../ThemeContext";
 import styles from "./Language.css";
 export const [currentLanguage, setCurrentLanguage] = useState("en");
