@@ -113,7 +113,7 @@ function App() {
 
   const handleCreateBook = (book) => {
     if (!book.name || !book.author || !book.topic) {
-      alert("Vui lòng điền đầy đủ thông tin sách.");
+      Notification.showErrorNotification("Vui lòng điền đầy đủ thông tin sách.");
       return;
     }
     const newDataBook = [
@@ -127,13 +127,13 @@ function App() {
     setDataBooks(newDataBook);
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));
-    handleSuccessMessage("create");
+    Notification.showNotification("Create success");
     handleToggleCreateModal();
   };
 
   const handleEditBook = (book) => {
     if (!book.name || !book.author || !book.topic) {
-      alert("Vui lòng điền đầy đủ thông tin sách.");
+      Notification.showErrorNotification("Vui lòng điền đầy đủ thông tin sách.");
       return;
     }
     const newDataBook = dataBooks.map((item) => {
@@ -146,7 +146,7 @@ function App() {
     setDataBooks(newDataBook);
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));
-    handleSuccessMessage("edit");
+    Notification.showNotification("Edit success");
     handleToggleEditModal();
   };
 
@@ -158,7 +158,7 @@ function App() {
     setDataBooks(newDataBook);
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));
-    handleSuccessMessage("delete");
+    Notification.showNotification("Delete success");
     handleToggleDeleteModal();
   };
 
@@ -171,20 +171,6 @@ function App() {
     setDataBooksShow(newDataBook);
     setCurrentPage(1);
     localStorage.setItem("page", "1");
-  };
-
-  const actionMessages = {
-    create: "Create",
-    delete: "Delete",
-    edit: "Edit",
-  };
-  const handleSuccessMessage = (action) => {
-    const content = actionMessages[action] || "";
-    Notification.showNotification(`${content} success`);
-  };
-  const handleErrorMessage = (action) => {
-    const content = actionMessages[action] || "";
-    Notification.showErrorNotification(`${content} error`);
   };
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
