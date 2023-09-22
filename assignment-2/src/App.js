@@ -142,7 +142,7 @@ function App() {
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));
     handleSuccessMessage("update");
-    handleToggleUpdateModal();
+    handleToggleEditModal();
   };
 
   const handleDeleteBook = (book) => {
@@ -174,9 +174,9 @@ function App() {
   };
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      {contextHolder}
+      <Notification />
       <Main>
-        <Notification />
+
         <div className={`store-actions row row-end theme-${theme}`}>
           <Search onChangeKeyword={handleSearch} />
           <Button title="Add book" handleClick={handleToggleCreateModal} />
