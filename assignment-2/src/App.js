@@ -27,7 +27,6 @@ function App() {
   const [newBook, setNewBook] = useState({});
   const [currentBookEdit, setCurrentBookEdit] = useState({});
   const [currentBookDelete, setCurrentBookDelete] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
 
 
   useEffect(() => {
