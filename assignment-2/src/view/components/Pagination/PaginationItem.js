@@ -1,12 +1,12 @@
 import styles from "./Pagination.module.css";
 
-const PaginationItem = ({ page, selected, handleClick }) => {
+const PaginationItem = ({ page, selected, handleClick, children }) => {
   return (
     <div
       className={`${styles["pagination-item"]} ${selected && styles["selected"]
         }`}
     >
-      <button onClick={() => handleClick(page)}>{page}</button>
+      <button onClick={() => handleClick(page)}>{children}</button>
     </div>
   );
 };
