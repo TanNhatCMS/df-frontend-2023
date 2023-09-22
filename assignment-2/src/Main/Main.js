@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../ThemeContext";
-import Header from "./Header/Header";
+import Header from "../Header/Header";
 import "./Main.css";
 
 const Main = ({ currentLanguage, onLanguageChange, children }) => {
