@@ -1,15 +1,102 @@
+/* Normalize CSS */
+html {
+  line-height: 1.15;
+  height: 100%;
+  width: 100%;
+}
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: #fff;
 }
 
-.inputLabel {
-  font-size: 12px;
-  font-weight: 500;
+body {
+  margin: 0;
 }
 
-.mb10 {
-  margin-bottom: 10px;
+/* Itilities  CSS*/
+.row {
+  margin: 24px 0 0;
+  padding: 0 12px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.row-end {
+  justify-content: end;
+  gap: 12px;
+}
+
+.modal-content label {
+  margin-bottom: 2px;
+  display: block;
+}
+
+.modal-content input,
+.modal-content select {
+  margin-bottom: 12px;
+  padding: 8px 8px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.modal-content.content-center {
+  text-align: center;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  background-color: transparent;
+}
+
+.modal-footer .footer__action {
+  background-color: transparent;
+}
+
+.modal-footer .footer__action.footer-around {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+}
+
+/* Theme: Dark */
+.row.theme-dark {
+  background-color: #444956;
+}
+
+
+.theme-dark.modal-content,
+.theme-dark.modal-content form,
+.theme-dark.modal-content label,
+.theme-dark.modal-content b,
+.theme-dark.modal-content span {
+  color: white;
+  background-color: transparent;
+}
+
+.languge {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+}
+
+.languge-btn {
+  background-color: transparent;
+}
+
+.languge-btn:hover {
+  cursor: pointer;
+}
+
+
+
+.languge span {
+  font-weight: 600;
 }

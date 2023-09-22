@@ -1,0 +1,33 @@
+#header {
+  height: 70px;
+  padding: 0 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #d9e0e6;
+
+}
+
+.header-logo a {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 32px;
+  background-color: transparent;
+}
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+
+#header.theme-dark,
+#header.theme-dark a,
+#header.theme-dark span,
+#header.theme-dark .header-actions {
+  color: crimson;
+  background-color: #22272e;
+}

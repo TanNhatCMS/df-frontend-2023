@@ -1,0 +1,27 @@
+.button {
+    background-color: transparent;
+}
+
+.button button {
+    padding: 8px 12px;
+    width: 100px;
+    font-weight: 500;
+    color: #fff;
+    background-color: crimson;
+    border: none;
+    border-radius: 4px;
+}
+
+.button button:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.button.button-option button{
+    background-color: #cbd5de;
+}
+
+.button.button-option.selected button{
+    opacity: 1;
+    background-color: crimson;
+}

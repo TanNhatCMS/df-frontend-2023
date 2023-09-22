@@ -1,0 +1,76 @@
+.data-table,
+table,
+tr,
+th,
+td {
+    background-color: transparent;
+}
+
+.data-table {
+    width: 100%;
+}
+
+.data-table table,
+.data-table th,
+.data-table td {
+    border: 2px solid #cbd5de;
+    border-collapse: collapse;
+}
+
+.data-table table {
+    width: 100%;
+}
+
+.data-table th,
+.data-table td {
+    text-align: left;
+    padding: 4px 8px;
+}
+
+.data-table th:nth-child(1) {
+    width: 2%;
+    text-align: center;
+}
+
+.data-table th:nth-child(2) {
+    width: 45%;
+}
+
+.data-table th:nth-child(3) {
+    width: 20%;
+}
+
+.data-table th:nth-child(4) {
+    width: 15%;
+}
+
+
+.data-table td:nth-child(1) {
+    text-align: center;
+}
+
+.data-table table button {
+    color: crimson;
+    text-decoration: underline;
+    background-color: transparent;
+    border: none;
+}
+
+.data-table table button:hover {
+    cursor: pointer;
+}
+
+.data-table table button:active {
+    color: #cbd5de;
+}
+
+/* Theme: Dark */
+.data-table.theme-dark,
+.data-table.theme-dark thead,
+.data-table.theme-dark tbody,
+/* .data-table.theme-dark tr, */
+/* .data-table.theme-dark td, */
+.data-table.theme-dark table {
+    color: #fff;
+   background-color: #444956;
+}

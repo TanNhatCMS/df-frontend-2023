@@ -1,0 +1,30 @@
+.account,
+.account div,
+.account img,
+.account h1 {
+    background-color: transparent;
+}
+
+.account-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: #e2e8ec;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.account-name {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.account {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.account.theme-dark i {
+    color: #fff;
+}

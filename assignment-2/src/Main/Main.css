@@ -1,0 +1,10 @@
+#main {
+    height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    background-color: #f7f9f9;
+}
+
+#main.theme-dark {
+    background-color: #444956;
+}

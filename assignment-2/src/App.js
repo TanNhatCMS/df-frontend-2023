@@ -1,257 +1,176 @@
+import Main from "./Main/Main";
+import Search from "./Search/Search";
+import Button from "./Button/Button";
+import Table from "./Table/Table";
+import Modal from "./Modal/Modal";
+import initialDataBooks from "./database/book-store";
+import { ThemeContext } from "./ThemeContext";
+import { currentLanguage, setCurrentLanguage } from "./Language/Language";
 import "./App.css";
-import { useState, useEffect } from "react";
-import {
-  ConfigProvider,
-  theme,
-  Button,
-  Table,
-  Typography,
-  Space,
-  Switch,
-  Avatar,
-  Input,
-  Modal,
-  Select,
-  Form,
-  message,
-  Popconfirm,
-  Pagination,
-
-} from "antd";
-import { UserOutlined, GlobalOutlined } from "@ant-design/icons";
-
-const { Title, Text } = Typography;
-const languageOptions = {
-  en: "English",
-  vi: "Tiếng Việt",
-};
+import { useEffect, useState } from "react";
 
 function App() {
-  const { defaultAlgorithm, darkAlgorithm } = theme;
-  const [form] = Form.useForm();
+  const [theme, setTheme] = useState("");
+  const [isShowModalCreate, setIsShowModalCreate] = useState(false);
+  const [isShowModalEdit, setIsShowModalEdit] = useState(false);
+  const [isShowModalDelete, setIsShowModalDelete] = useState(false);
+  const [isHoverDelete, setIsHoverDelete] = useState(false);
+  const [currentPage, setCurrentPage] = useState(0);
+  const dataTitle = ["#", "Name", "Author", "Topic", "Action"];
+  const [dataBooks, setDataBooks] = useState([]);
+  const [dataBooksShow, setDataBooksShow] = useState([]);
+  const [newBook, setNewBook] = useState({});
+  const [currentBookEdit, setCurrentBookEdit] = useState({});
+  const [currentBookDelete, setCurrentBookDelete] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const [messageApi, contextHolder] = message.useMessage();
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
-  const [booksFiltered, setBooksFiltered] = useState("");
-  const [openModal, setOpenModal] = useState(false);
-  const [books, setBooks] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentLanguage, setCurrentLanguage] = useState("en");
-  const [editingBook, setEditingBook] = useState(null);
-  const pageSize = 5;
-
 
   useEffect(() => {
-    setBooks([
-      {
-        id: 1,
-        name: 'Refactoring',
-        author: 'Martin Fowler',
-        topic: 'Programming',
-      },
-      {
-        id: 2,
-        name: 'Design Data-Intensive Applications',
-        author: 'Martin Kleppman',
-        topic: 'Database',
-      },
-      {
-        id: 3,
-        name: 'The Phoenix Project',
-        author: 'Gene Kim',
-        topic: 'Devops',
-      },
-      {
-        id: 4,
-        name: 'JavaScript: The Good Parts',
-        author: 'Douglas Crockford',
-        topic: 'Frontend',
-      },
-      {
-        id: 5,
-        name: 'Node.js Design Patterns',
-        author: 'Mario Casciaro',
-        topic: 'Backend',
-      },
-      {
-        id: 6,
-        name: 'Clean Code: A Handbook of Agile Software Craftsmanship',
-        author: 'Robert C. Martin',
-        topic: 'Programming',
-      },
-      {
-        id: 7,
-        name: 'Database Systems: The Complete Book',
-        author: 'Hector Garcia-Molina',
-        topic: 'Database',
-      },
-      {
-        id: 8,
-        name: 'Continuous Delivery: Reliable Software Releases through Build, Test, and Deployment Automation',
-        author: 'Jez Humble and David Farley',
-        topic: 'Devops',
-      },
-      {
-        id: 9,
-        name: 'Eloquent JavaScript',
-        author: 'Marijn Haverbeke',
-        topic: 'Frontend',
-      },
-      {
-        id: 10,
-        name: 'Python Crash Course',
-        author: 'Eric Matthes',
-        topic: 'Programming',
-      },
-      {
-        id: 11,
-        name: 'Introduction to the Theory of Computation',
-        author: 'Michael Sipser',
-        topic: 'Programming',
-      },
-      {
-        id: 12,
-        name: 'MongoDB: The Definitive Guide',
-        author: 'Kristina Chodorow',
-        topic: 'Database',
-      },
-      {
-        id: 13,
-        name: 'Kubernetes Up and Running',
-        author: 'Kelsey Hightower',
-        topic: 'Devops',
-      },
-      {
-        id: 14,
-        name: 'React Up and Running',
-        author: 'Stoyan Stefanov',
-        topic: 'Frontend',
-      },
-      {
-        id: 15,
-        name: 'Node.js in Action',
-        author: 'Mike Cantelon',
-        topic: 'Backend',
-      },
-      {
-        id: 16,
-        name: 'Agile Estimating and Planning',
-        author: 'Mike Cohn',
-        topic: 'Devops',
-      },
-      {
-        id: 17,
-        name: 'Head First Java',
-        author: 'Kathy Sierra and Bert Bates',
-        topic: 'Programming',
-      },
-      {
-        id: 18,
-        name: 'Learning SQL',
-        author: 'Alan Beaulieu',
-        topic: 'Database',
-      },
-      {
-        id: 19,
-        name: 'The Pragmatic Programmer',
-        author: 'Andrew Hunt and David Thomas',
-        topic: 'Programming',
-      },
-      {
-        id: 20,
-        name: 'Docker Deep Dive',
-        author: 'Nigel Poulton',
-        topic: 'Devops',
+    const setUp = async () => {
+      const storedLanguage = localStorage.getItem("Language");
+      if (storedLanguage) {
+        setCurrentLanguage(storedLanguage);
       }
-    ]);
+      const localTheme = localStorage.getItem("theme");
+      const localPage = Number(localStorage.getItem("page"));
+      const localDataBooks = JSON.parse(localStorage.getItem("book"));
+
+      if (!localTheme) {
+        setTheme("light");
+        localStorage.setItem("theme", "light");
+      } else {
+        setTheme(localTheme);
+      }
+
+      if (!localPage) {
+        setCurrentPage(1);
+        localStorage.setItem("page", "1");
+      } else {
+        setCurrentPage(localPage);
+      }
+
+      if (!localDataBooks) {
+        setDataBooks([...initialDataBooks]);
+        setDataBooksShow([...initialDataBooks]);
+        localStorage.setItem(
+          "book-store",
+          JSON.stringify([...initialDataBooks])
+        );
+      } else {
+        setDataBooks(localDataBooks);
+        setDataBooksShow(localDataBooks);
+      }
+      await new Promise((r) => setTimeout(r, 800));
+      setIsLoading(false);
+    };
+    setUp();
+
   }, []);
+  const handleToggleCreateModal = () => {
+    if (!isShowModalCreate) {
+      console.log("Open Modal Create Book");
+      setNewBook({
+        name: "",
+        author: "",
+        topic: "",
+      });
+    }
+    setIsShowModalCreate(!isShowModalCreate);
+  };
+
+  const handleToggleEditModal = (id) => {
+    if (!isShowModalEdit) {
+      console.log("Open Modal Update Book");
+      const currentBook = dataBooks.find((item) => item.id === id);
+      if (currentBook) {
+        setCurrentBookEdit(currentBook);
+      } else {
+        setCurrentBookEdit({
+          name: "",
+          author: "",
+          topic: "",
+        });
+      }
+    }
+
+    setIsShowModalEdit(!isShowModalEdit);
+  };
+
+  const handleToggleDeleteModal = (id) => {
+    if (!isShowModalDelete) {
+      console.log("Open Modal Delete Book");
+      const currentBook = dataBooks.find((item) => item.id === id);
+      if (currentBook) {
+        setCurrentBookDelete(currentBook);
+      } else {
+        setCurrentBookDelete({
+          name: "",
+          author: "",
+          topic: "",
+        });
+      }
+    }
+    setIsShowModalDelete(!isShowModalDelete);
+  };
+
+  const handleCreateBook = (book) => {
+    const newDataBook = [
+      ...dataBooks,
+      {
+        id: dataBooks.slice(-1)[0].id + 1,
+        ...book,
+      },
+    ];
+
+    setDataBooks(newDataBook);
+    setDataBooksShow(newDataBook);
+    localStorage.setItem("book", JSON.stringify(newDataBook));
+    handleSuccessMessage("create");
+    handleToggleCreateModal();
+  };
+
+  const handleUpdateBook = (book) => {
+    const newDataBook = dataBooks.map((item) => {
+      if (item.id === book.id) {
+        return book;
+      }
+      return item;
+    });
+
+    setDataBooks(newDataBook);
+    setDataBooksShow(newDataBook);
+    localStorage.setItem("book", JSON.stringify(newDataBook));
+    handleSuccessMessage("update");
+    handleToggleUpdateModal();
+  };
+
+  const handleDeleteBook = (book) => {
+    const newDataBook = dataBooks.filter((item) => {
+      return item.id !== book.id;
+    });
+
+    setDataBooks(newDataBook);
+    setDataBooksShow(newDataBook);
+    localStorage.setItem("book", JSON.stringify(newDataBook));
+    handleSuccessMessage("delete");
+    handleToggleDeleteModal();
+  };
+
+  const handleSearch = (keyword) => {
+    keyword = keyword.toLowerCase();
+    const newDataBook = dataBooks.filter((book) => {
+      return book.name.toLowerCase().includes(keyword);
+    });
+
+    setDataBooksShow(newDataBook);
+    setCurrentPage(1);
+    localStorage.setItem("page", "1");
+  };
+
 
   useEffect(() => {
     localStorage.setItem("books", JSON.stringify(books));
   }, [books]);
-
-  const topics = [
-    "Programming",
-    "Database",
-    "Devops",
-    "Frontend",
-    "Backend"
-  ];
-
-  const tableColumns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Author",
-      dataIndex: "author",
-      key: "author",
-    },
-    {
-      title: "Topic",
-      dataIndex: "topic",
-      key: "topic",
-    },
-    {
-      title: "Action",
-      dataIndex: "action",
-      key: "action",
-      render: (_, record) => (
-        <Space>
-          <Button type='text' onClick={() => handleEditBook(record)}>
-            Edit
-          </Button>
-          <Popconfirm
-            title='Delete book'
-            description='Are you sure to delete this book?'
-            onConfirm={() => handleDeleteBook(record.name)}
-            okText='Yes'
-            cancelText='No'
-          >
-            <Button type='text' danger>
-              Delete
-            </Button>
-          </Popconfirm>
-        </Space>
-
-      ),
-    },
-  ];
-  const handleEditBook = (book) => {
-    setEditingBook(book);
-    setOpenModal(true);
-  };
-  const handleLanguageChange = () => {
-    setCurrentLanguage((prevLanguage) => (prevLanguage === "en" ? "vi" : "en"));
-  };
-  const handleSwitchTheme = () => {
-    setIsDarkMode((previousValue) => !previousValue);
-  };
-
-  const handleCloseModal = () => {
-    setOpenModal(false);
-  };
-
-  const handleAddBook = (formData) => {
-    if (editingBook) {
-      setBooks((oldBooks) =>
-        oldBooks.map((book) =>
-          book.name === editingBook.name ? { ...book, ...formData } : book
-        )
-      );
-      handleSuccessMessage("update");
-    } else {
-      setBooks((oldBooks) => [...oldBooks, formData]);
-      handleSuccessMessage("create");
-    }
-    handleCloseModal();
-  };
-  const handleDeleteBook = (name) => {
-    setBooks((oldBooks) => oldBooks.filter((book) => book.name !== name));
-  };
-
   const handleSuccessMessage = (action) => {
     const content =
       action === "create" ? "Create" : action === "delete" ? "Delete" : "";
@@ -260,181 +179,202 @@ function App() {
       content: `${content} success`,
     });
   };
-
-  const handleSearch = () => {
-    const reg = new RegExp(searchValue, "gi");
-
-    const search = books.filter((book) => book.name.search(reg) > -1);
-    setBooksFiltered(
-      search.map((item) => {
-        return { label: item.name, value: item.name };
-      })
-    );
-  };
-
-  const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const startIndex = (currentPage - 1) * pageSize;
-  const endIndex = startIndex + pageSize;
-  const tableData = books.map((book, i) => {
-    return {
-      key: i,
-      name: book.name,
-      author: book.author,
-      topic: book.topic,
-      action: "Delete",
-    };
-  });
-  const visibleBooks = books.slice(startIndex, endIndex);
   return (
-    <ConfigProvider
-      theme={{
-        algorithm: isDarkMode ? darkAlgorithm : defaultAlgorithm,
-      }}
-    >
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       {contextHolder}
-      <Space
-        style={{
-          width: "100%",
-          padding: "6px 12px",
-          justifyContent: "space-between",
-          borderBottom: `1px solid ${isDarkMode ? "rgba(255,255,255,0.15)" : "rgba(0,0,0,0.15)"
-            }`,
-          backgroundColor: isDarkMode ? "rgb(36,37,38)" : "white",
-        }}
-      >
-        <Space>
-          <Title
-            style={{
-              fontSize: "18px",
-              fontWeight: 700,
-              margin: 0,
-            }}
-          >
-            Bookstore
-          </Title>
-        </Space>
-        <Space>
-          <Switch checked={isDarkMode} onChange={handleSwitchTheme} />
-          <Text
-            style={{ fontSize: "14px", fontWeight: 500, marginRight: "7px" }}
-          >
-            {isDarkMode ? "Dark" : "Light"} mode
-          </Text>
-          <Avatar icon={<UserOutlined />} />
-          <Text style={{ fontSize: "14px", fontWeight: 500 }}>
-            TânNhậtCMS
-          </Text>
-          <Button type="text" onClick={handleLanguageChange}>
-            <GlobalOutlined />
-            {languageOptions[currentLanguage]}
-          </Button>
-        </Space>
-      </Space>
-      <Space
-        direction='vertical'
-        style={{
-          width: "100%",
-          minHeight: "calc(100vh - 45px)",
-          padding: "30px 15px 0 15px",
-          backgroundColor: isDarkMode ? "rgb(36,37,38)" : "white",
-        }}
-      >
-        <Space.Compact
-          style={{
-            width: "100%",
-            justifyContent: "space-between",
-            marginBottom: "20px",
-          }}
-        >
-          <Select
-            showSearch
-            onChange={(value) => setSearchValue(value)}
-            labelInValue
-            options={booksFiltered}
-            notFoundContent='No book match the search value'
-            onSearch={handleSearch}
-            placeholder='Search books'
-            style={{ minWidth: "200px" }}
-          />
-          <Button
-            type='primary'
-            danger
-            onClick={() => {
-              setOpenModal(true);
-            }}
-          >
-            {currentLanguage === "en" ? "Add book" : "Thêm Sách"}
-          </Button>
-        </Space.Compact>
-
-        <Table dataSource={visibleBooks} columns={tableColumns} bordered pagination={false} />
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <Pagination
-            current={currentPage}
-            total={books.length}
-            pageSize={pageSize}
-            onChange={handlePageChange}
+      <Main>
+        <div className={`store-actions row row-end theme-${theme}`}>
+          <Search onChangeKeyword={handleSearch} />
+          <Button title="Add book" handleClick={handleToggleCreateModal} />
+        </div>
+        <div className={`store-data row theme-${theme}`}>
+          <Table
+            currentPage={currentPage}
+            dataTitle={dataTitle}
+            data={dataBooksShow}
+            handleActions={[
+              setCurrentPage,
+              handleToggleUpdateModal,
+              handleToggleDeleteModal,
+            ]}
           />
         </div>
-      </Space>
-      <Modal
-        title='Add book'
-        open={openModal}
-        okText='Create'
-        cancelText='Cancel'
-        onOk={() => {
-          form
-            .validateFields()
-            .then((values) => {
-              form.resetFields();
-              handleAddBook(values);
-            })
-            .catch((info) => {
-              console.log("Validate Failed:", info);
-            });
-          handleSuccessMessage("create");
-          handleCloseModal();
-        }}
-        onCancel={handleCloseModal}
-      >
-        <Form
-          form={form}
-          layout='vertical'
-          name='add-book-form'
-          initialValues={{ topic: "Programming" }}
-        >
-          <Form.Item
-            name='name'
-            label='Name'
-            rules={[
-              { required: true, message: "Please input the name of book!" },
-            ]}
-          >
-            <Input placeholder='Book name' />
-          </Form.Item>
-          <Form.Item
-            name='author'
-            label='Author'
-            rules={[
-              { required: true, message: "Please input the author of book!" },
-            ]}
-          >
-            <Input placeholder='Book author' />
-          </Form.Item>
-          <Form.Item name='topic' label='Topic'>
-            <Select
-              options={topics.map((topic) => {
-                return { value: topic, label: topic };
-              })}
-            />
-          </Form.Item>
-        </Form>
-      </Modal>
-    </ConfigProvider >
+      </Main>
+
+      {/* Modal Create Book */}
+      {isShowModalCreate && (
+        <Modal title="Add Book" handleToggleModal={handleToggleCreateModal}>
+          <div className={`modal-content theme-${theme}`}>
+            <form action="">
+              <label htmlFor="input__name">Name</label>
+              <input
+                id="input__name"
+                type="text"
+                name="name"
+                placeholder="Enter book's name ..."
+                autoComplete="on"
+                value={newBook.name}
+                onChange={(event) =>
+                  setNewBook({ ...newBook, name: event.target.value })
+                }
+              />
+              <label htmlFor="input__author">Author</label>
+              <input
+                id="input__author"
+                type="text"
+                name="author"
+                placeholder="Enter book's author ..."
+                autoComplete="on"
+                value={newBook.author}
+                onChange={(event) =>
+                  setNewBook({ ...newBook, author: event.target.value })
+                }
+              />
+              <label htmlFor="input__topic">Topic</label>
+              <select
+                id="input__topic"
+                name="topic"
+                value={newBook.topic}
+                onChange={(event) =>
+                  setNewBook({ ...newBook, topic: event.target.value })
+                }
+              >
+                <option value="" disabled hidden>
+                  Select book's topic
+                </option>
+                <option value="Programming">Programming</option>
+                <option value="Database">Database</option>
+                <option value="Devops">Devops</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+              </select>
+            </form>
+          </div>
+          <div className="modal-footer">
+            <div className="footer__action">
+              <Button
+                title="Create"
+                handleClick={() => handleCreateBook(newBook)}
+              ></Button>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      {/* Modal Edit Book */}
+      {isShowModalEdit && (
+        <Modal title="Edit Book" handleToggleModal={handleToggleEditModal}>
+          <div className={`modal-content theme-${theme}`}>
+            <form action="">
+              <label htmlFor="input__name">Name</label>
+              <input
+                id="input__name"
+                type="text"
+                name="name"
+                placeholder="Enter book's name ..."
+                autoComplete="on"
+                value={currentBookEdit.name}
+                onChange={(event) =>
+                  setCurrentBookEdit({
+                    ...currentBookEdit,
+                    name: event.target.value,
+                  })
+                }
+              />
+              <label htmlFor="input__author">Author</label>
+              <input
+                id="input__author"
+                type="text"
+                name="author"
+                placeholder="Enter book's author ..."
+                autoComplete="on"
+                value={currentBookEdit.author}
+                onChange={(event) =>
+                  setCurrentBookEdit({
+                    ...currentBookEdit,
+                    author: event.target.value,
+                  })
+                }
+              />
+              <label htmlFor="input__topic">Topic</label>
+              <select
+                id="input__topic"
+                name="topic"
+                value={currentBookEdit.topic}
+                onChange={(event) =>
+                  setCurrentBookEdit({
+                    ...currentBookEdit,
+                    topic: event.target.value,
+                  })
+                }
+              >
+                <option value="" disabled hidden>
+                  Select book's topic
+                </option>
+                <option value="Programming">Programming</option>
+                <option value="Database">Database</option>
+                <option value="Devops">Devops</option>
+                <option value="Frontend">Frontend</option>
+                <option value="Backend">Backend</option>
+              </select>
+            </form>
+          </div>
+          <div className="modal-footer">
+            <div className="footer__action">
+              <Button
+                title="Update"
+                handleClick={() => handleUpdateBook(currentBookEdit)}
+              ></Button>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      {/* Modal Delete Book */}
+      {isShowModalDelete && (
+        <Modal title="Delete Book" handleToggleModal={handleToggleDeleteModal}>
+          <div className={`modal-content content-center  theme-${theme}`}>
+            <span>Do you want to delete the book named</span>
+            <br />
+            <span>
+              <b>{currentBookDelete.name}</b> ?
+            </span>
+          </div>
+          <div className="modal-footer">
+            <div className="footer__action footer-around">
+              <Button
+                option={true}
+                selected={isHoverDelete}
+                title="Delete"
+                handleClick={() => handleDeleteBook(currentBookDelete)}
+                handleHover={() => {
+                  if (!isHoverDelete) {
+                    setIsHoverDelete(!isHoverDelete);
+                  }
+                }}
+              >
+                Delete
+              </Button>
+              <Button
+                option={true}
+                selected={!isHoverDelete}
+                title="Cancel"
+                handleClick={handleToggleDeleteModal}
+                handleHover={() => {
+                  if (isHoverDelete) {
+                    setIsHoverDelete(!isHoverDelete);
+                  }
+                }}
+              >
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      {isLoading && <Loading />}
+    </ThemeContext.Provider>
   );
 }
-
 export default App;
