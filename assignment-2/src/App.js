@@ -69,7 +69,6 @@ function App() {
   }, []);
   const handleToggleCreateModal = () => {
     if (!isShowModalCreate) {
-      console.log("Open Modal Create Book");
       setNewBook({
         name: "",
         author: "",
@@ -81,7 +80,6 @@ function App() {
 
   const handleToggleEditModal = (id) => {
     if (!isShowModalEdit) {
-      console.log("Open Modal Update Book");
       const currentBook = dataBooks.find((item) => item.id === id);
       if (currentBook) {
         setCurrentBookEdit(currentBook);
@@ -99,7 +97,6 @@ function App() {
 
   const handleToggleDeleteModal = (id) => {
     if (!isShowModalDelete) {
-      console.log("Open Modal Delete Book");
       const currentBook = dataBooks.find((item) => item.id === id);
       if (currentBook) {
         setCurrentBookDelete(currentBook);
@@ -115,6 +112,10 @@ function App() {
   };
 
   const handleCreateBook = (book) => {
+    if (!book.name || !book.author || !book.topic) {
+      alert("Vui lòng điền đầy đủ thông tin sách.");
+      return;
+    }
     const newDataBook = [
       ...dataBooks,
       {
@@ -130,7 +131,11 @@ function App() {
     handleToggleCreateModal();
   };
 
-  const handleUpdateBook = (book) => {
+  const handleEditBook = (book) => {
+    if (!book.name || !book.author || !book.topic) {
+      alert("Vui lòng điền đầy đủ thông tin sách.");
+      return;
+    }
     const newDataBook = dataBooks.map((item) => {
       if (item.id === book.id) {
         return book;
@@ -141,7 +146,7 @@ function App() {
     setDataBooks(newDataBook);
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));
-    handleSuccessMessage("update");
+    handleSuccessMessage("edit");
     handleToggleEditModal();
   };
 
@@ -168,9 +173,18 @@ function App() {
     localStorage.setItem("page", "1");
   };
 
+  const actionMessages = {
+    create: "Create",
+    delete: "Delete",
+    edit: "Edit",
+  };
   const handleSuccessMessage = (action) => {
-    const content = action === "create" ? "Create" : action === "delete" ? "Delete" : "";
+    const content = actionMessages[action] || "";
     Notification.showNotification(`${content} success`);
+  };
+  const handleErrorMessage = (action) => {
+    const content = actionMessages[action] || "";
+    Notification.showErrorNotification(`${content} error`);
   };
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -205,6 +219,7 @@ function App() {
                 id="input__name"
                 type="text"
                 name="name"
+                title="Please enter book name"
                 placeholder="Enter book's name ..."
                 autoComplete="on"
                 value={newBook.name}
@@ -217,6 +232,7 @@ function App() {
                 id="input__author"
                 type="text"
                 name="author"
+                title="Please enter author name"
                 placeholder="Enter book's author ..."
                 autoComplete="on"
                 value={newBook.author}
@@ -228,6 +244,7 @@ function App() {
               <select
                 id="input__topic"
                 name="topic"
+                title="Please select book's topic"
                 value={newBook.topic}
                 onChange={(event) =>
                   setNewBook({ ...newBook, topic: event.target.value })
@@ -265,6 +282,7 @@ function App() {
                 id="input__name"
                 type="text"
                 name="name"
+                title="Please enter book name"
                 placeholder="Enter book's name ..."
                 autoComplete="on"
                 value={currentBookEdit.name}
@@ -282,6 +300,7 @@ function App() {
                 name="author"
                 placeholder="Enter book's author ..."
                 autoComplete="on"
+                title="Please enter author name"
                 value={currentBookEdit.author}
                 onChange={(event) =>
                   setCurrentBookEdit({
@@ -316,8 +335,8 @@ function App() {
           <div className="modal-footer">
             <div className="footer__action">
               <Button
-                title="Update"
-                handleClick={() => handleUpdateBook(currentBookEdit)}
+                title="Save"
+                handleClick={() => handleEditBook(currentBookEdit)}
               ></Button>
             </div>
           </div>
