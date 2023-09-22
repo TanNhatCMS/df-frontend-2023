@@ -6,11 +6,16 @@ import Modal from "./Modal/Modal";
 import Notification from './Notification/Notification';
 import initialDataBooks from "./database/book-store";
 import { ThemeContext } from "./ThemeContext";
-import { currentLanguage, setCurrentLanguage } from "./Language/Language";
+import Header from "./Header/Header";
 import "./App.css";
 import { useEffect, useState } from "react";
 
 function App() {
+  const [currentLanguage, setCurrentLanguage] = useState("en");
+
+  const handleLanguageChange = (newLanguage) => {
+    setCurrentLanguage(newLanguage);
+  };
   const [theme, setTheme] = useState("");
   const [isShowModalCreate, setIsShowModalCreate] = useState(false);
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
@@ -28,10 +33,6 @@ function App() {
 
   useEffect(() => {
     const setUp = async () => {
-      const storedLanguage = localStorage.getItem("Language");
-      if (storedLanguage) {
-        setCurrentLanguage(storedLanguage);
-      }
       const localTheme = localStorage.getItem("theme");
       const localPage = Number(localStorage.getItem("page"));
       const localDataBooks = JSON.parse(localStorage.getItem("book"));
@@ -175,8 +176,8 @@ function App() {
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
       <Notification />
+      <Header currentLanguage={currentLanguage} onLanguageChange={handleLanguageChange}></Header>
       <Main>
-
         <div className={`store-actions row row-end theme-${theme}`}>
           <Search onChangeKeyword={handleSearch} />
           <Button title="Add book" handleClick={handleToggleCreateModal} />
