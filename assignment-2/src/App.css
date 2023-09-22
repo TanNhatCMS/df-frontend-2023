@@ -78,25 +78,3 @@ body {
   color: white;
   background-color: transparent;
 }
-
-.languge {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  background-color: transparent;
-}
-
-.languge-btn {
-  background-color: transparent;
-}
-
-.languge-btn:hover {
-  cursor: pointer;
-}
-
-
-
-.languge span {
-  font-weight: 600;
-}

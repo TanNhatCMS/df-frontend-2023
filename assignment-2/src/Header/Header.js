@@ -3,7 +3,7 @@ import { ThemeContext } from "../ThemeContext";
 import Theme from "../Theme/Theme";
 import Account from "../Account/Account";
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
-import "./Header.css";
+import "./Header.module.css";
 
 const Header = ({ currentLanguage, onLanguageChange }) => {
   const { theme } = useContext(ThemeContext);

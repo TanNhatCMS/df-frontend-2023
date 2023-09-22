@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { ThemeContext } from "../ThemeContext";
 import PaginationItem from "./PaginationItem";
-import styles from "./Pagination.css";
+import styles from "./Pagination.module.css";
 
 const Pagination = ({ currentPage, total, limit, onPageChange }) => {
   const { theme } = useContext(ThemeContext);

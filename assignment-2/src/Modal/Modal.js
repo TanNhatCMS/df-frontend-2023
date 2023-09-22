@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../ThemeContext";
-import styles from "./Modal.css";
+import styles from "./Modal.module.css";
 
 const Modal = ({ handleToggleModal, title, children }) => {
   const { theme } = useContext(ThemeContext);

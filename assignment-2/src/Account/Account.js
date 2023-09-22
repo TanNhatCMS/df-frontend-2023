@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ThemeContext } from "../ThemeContext";
-import styles from "./Account.css";
+import styles from "./Account.module.css";
 
 const Account = () => {
   const { theme } = useContext(ThemeContext);

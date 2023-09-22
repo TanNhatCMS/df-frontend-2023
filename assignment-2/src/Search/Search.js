@@ -1,4 +1,4 @@
-import styles from "./Search.css";
+import styles from "./Search.module.css";
 
 const Search = ({ onChangeKeyword }) => {
   return (

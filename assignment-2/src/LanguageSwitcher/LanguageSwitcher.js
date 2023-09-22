@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import "./LanguageSwitcher.css";
+import React, { useEffect } from "react";
+import "./LanguageSwitcher.module.css";
 
 const translations = {
   "en": {

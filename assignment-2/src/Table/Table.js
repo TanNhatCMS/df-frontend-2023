@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { ThemeContext } from "../ThemeContext";
 import Pagination from "../Pagination/Pagination";
-import styles from "./Table.css";
+import styles from "./Table.module.css";
 
 const Table = ({ currentPage, dataTitle, data, handleActions }) => {
   const { theme } = useContext(ThemeContext);
