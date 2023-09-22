@@ -8,7 +8,6 @@ const Main = ({ currentLanguage, onLanguageChange, children }) => {
 
   return (
     <> <Header currentLanguage={currentLanguage} onLanguageChange={onLanguageChange} />
-      <Header ></Header>
       <main id="main" className={`theme-${theme}`}>
         {children}
       </main>
