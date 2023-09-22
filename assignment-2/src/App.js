@@ -163,7 +163,7 @@ function App() {
     const newDataBook = dataBooks.filter((item) => {
       return item.id !== book.id;
     });
-
+    setCurrentPage(1);
     setDataBooks(newDataBook);
     setDataBooksShow(newDataBook);
     localStorage.setItem("book", JSON.stringify(newDataBook));

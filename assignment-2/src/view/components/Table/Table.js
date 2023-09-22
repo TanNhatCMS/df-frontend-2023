@@ -10,15 +10,14 @@ const Table = ({ currentPage, dataTitle, data, handleActions }) => {
 
   const [dataPage, setDataPage] = useState([]);
   useEffect(() => {
-    let dataCurrentPage = [];
-    for (let i = 0; i < 5; i++) {
-      dataCurrentPage[i] = {
-        serial: i + 1 + (currentPage - 1) * limitPage,
-        ...data[i + (currentPage - 1) * limitPage],
-      };
-    }
+    const startIndex = (currentPage - 1) * limitPage;
+    const endIndex = Math.min(startIndex + limitPage, dataLength);
+    const dataCurrentPage = data.slice(startIndex, endIndex).map((item, index) => ({
+      serial: index + startIndex + 1,
+      ...item,
+    }));
     setDataPage(dataCurrentPage);
-  }, [data, currentPage]);
+  }, [data, currentPage, dataLength]);
 
   const handleChangePage = (page) => {
     handleActions[0](page);
@@ -37,26 +36,30 @@ const Table = ({ currentPage, dataTitle, data, handleActions }) => {
         </thead>
         <tbody>
           {dataPage.map((item, index) => {
-            return (
-              <tr key={index}>
-                <td>{item.serial}</td>
-                <td>{item.name}</td>
-                <td>{item.author}</td>
-                <td>{item.topic}</td>
-                <td>
-                  {item.id && (
-                    <>
-                      <button onClick={() => handleActions[1](item.id)}>
-                        Edit
-                      </button>
-                      <button onClick={() => handleActions[2](item.id)}>
-                        Delete
-                      </button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            );
+            if (item) {
+              return (
+                <tr key={index}>
+                  <td>{item.serial}</td>
+                  <td>{item.name}</td>
+                  <td>{item.author}</td>
+                  <td>{item.topic}</td>
+                  <td>
+                    {item.id && (
+                      <>
+                        <button onClick={() => handleActions[1](item.id)}>
+                          Edit
+                        </button>
+                        <button onClick={() => handleActions[2](item.id)}>
+                          Delete
+                        </button>
+                      </>
+                    )}
+                  </td>
+                </tr>
+              );
+            } else {
+              return null;
+            }
           })}
         </tbody>
       </table>
