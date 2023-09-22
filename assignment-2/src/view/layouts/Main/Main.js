@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import Header from "../Header/Header";
 import "./Main.module.css";
-import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
+import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher';
 const Main = ({ currentLanguage, onLanguageChange, children }) => {
   const { theme } = useContext(ThemeContext);
 
