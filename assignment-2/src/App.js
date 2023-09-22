@@ -3,7 +3,7 @@ import Search from "./Search/Search";
 import Button from "./Button/Button";
 import Table from "./Table/Table";
 import Modal from "./Modal/Modal";
-import Notification from './Notification';
+import Notification from './Notification/Notification';
 import initialDataBooks from "./database/book-store";
 import { ThemeContext } from "./ThemeContext";
 import { currentLanguage, setCurrentLanguage } from "./Language/Language";
@@ -176,6 +176,7 @@ function App() {
     <ThemeContext.Provider value={{ theme, setTheme }}>
       {contextHolder}
       <Main>
+        <Notification />
         <div className={`store-actions row row-end theme-${theme}`}>
           <Search onChangeKeyword={handleSearch} />
           <Button title="Add book" handleClick={handleToggleCreateModal} />
