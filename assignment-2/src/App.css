@@ -1,24 +1,7 @@
-/* Normalize CSS */
-html {
-  line-height: 1.15;
-  height: 100%;
-  width: 100%;
-}
-
-* {
-  box-sizing: border-box;
-  font-size: 16px;
-}
-
-body {
-  margin: 0;
-}
-
 /* Itilities  CSS*/
 .row {
   margin: 24px 0 0;
   padding: 0 12px;
-  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -75,4 +58,36 @@ body {
 .theme-dark.modal-content span {
   color: white;
   background-color: transparent;
+}
+
+.dark-mode-toggle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 1rem;
+}
+
+.toggle-switch {
+  width: 45px;
+  height: 25px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 0 3px;
+}
+
+.toggle-switch.on {
+  background-color: var(--primary-color);
+}
+
+.toggle-switch.off {
+  background-color: #ccc;
+  /* Gray background when the switch is off */
+}
+
+.toggle-switch.on .slider {
+  transform: translateX(19px);
+  /* Move the slider to the right when on */
 }

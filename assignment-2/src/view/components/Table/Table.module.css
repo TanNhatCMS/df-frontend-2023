@@ -6,6 +6,14 @@ td {
     background-color: transparent;
 }
 
+table {
+    width: 90%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin: 0 auto;
+    background-color: transparent;
+}
+
 .data-table {
     width: 100%;
 }
@@ -72,5 +80,5 @@ td {
 /* .data-table.theme-dark td, */
 .data-table.theme-dark table {
     color: #fff;
-   background-color: #444956;
+    background-color: #444956;
 }
