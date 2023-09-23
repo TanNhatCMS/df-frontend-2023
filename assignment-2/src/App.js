@@ -6,32 +6,91 @@ import Modal from "./view/components/Modal/Modal";
 import Notification from './view/components/Notification/Notification';
 import initialDataBooks from "./database/book-store";
 import { ThemeContext } from "./view/contexts/ThemeContext";
-import { translations } from "./view/components/LanguageSwitcher/LanguageSwitcher";
 import "./App.css";
 import { useEffect, useState } from "react";
 
 function App() {
   const [currentLanguage, setCurrentLanguage] = useState("en");
-
-  const handleLanguageChange = (newLanguage) => {
-    setCurrentLanguage(newLanguage);
-  };
   const [theme, setTheme] = useState("");
   const [isShowModalCreate, setIsShowModalCreate] = useState(false);
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [isHoverDelete, setIsHoverDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const dataTitle = ["#", "Name", "Author", "Topic", "Action"];
+  const [dataTitle, setTitle] = useState([]);
   const [dataBooks, setDataBooks] = useState([]);
   const [dataBooksShow, setDataBooksShow] = useState([]);
   const [newBook, setNewBook] = useState({});
   const [currentBookEdit, setCurrentBookEdit] = useState({});
   const [currentBookDelete, setCurrentBookDelete] = useState({});
 
+  const english = {
+    language: "English",
+    titleSite: "BookStore",
+    addbook: "Add Book",
+    create: "Create",
+    cancel: "Cancel",
+    searchbook: "Search Book",
+    namePlaceholder: "Enter Name Book",
+    authorPlaceholder: "Enter Author Book",
+    modalTitle: "Add New Book",
+    name: "Name",
+    edit: "Edit",
+    delete: "Delete",
+    author: "Author",
+    topic: "Topic",
+    action: "Action",
+    confirm: "Confirm",
+    close: "Close",
+    id: "#",
+    selectTopic: "Select Topic",
+    editBook: "Edit Book",
+    saveBook: "Save Book",
+    deleteBook: "Delete Book",
+    deleteBookConfirmation: "Do you want to delete ",
+  };
+  const vietnamese = {
+    language: "Tiếng Việt",
+    titleSite: "Cửa hàng sách",
+    addbook: "Thêm Sách",
+    create: "Thêm Sách",
+    cancel: "Hủy",
+    searchbook: "Tìm Sách",
+    namePlaceholder: "Nhập tên sách",
+    authorPlaceholder: "Nhập tác giả",
+    modalTitle: "Thêm Sách Mới",
+    name: "Tên Sách",
+    edit: "Sửa",
+    delete: "Xoá",
+    author: "Tác giả",
+    topic: "Chủ đề",
+    action: "Hành động",
+    confirm: "Xác nhận",
+    close: "Đóng",
+    id: "STT",
+    selectTopic: "Chọn chủ đề",
+    editBook: "Sửa thông tin sách",
+    saveBook: "Lưu",
+    deleteBook: "Xoá sách",
+    deleteBookConfirmation: "Bạn có muốn xóa ",
+  };
+  function getTranslation(key) {
+    if (currentLanguage === "en") {
+      return english[key] || key;
+    } else {
+      return vietnamese[key] || key;
+    }
+  };
 
   useEffect(() => {
+    const storedLanguage = localStorage.getItem("currentLanguage");
+    if (storedLanguage) {
+      setCurrentLanguage(storedLanguage);
+    }
+    setTitle([getTranslation("id"), getTranslation("name"), getTranslation("author"), getTranslation("topic"), getTranslation("action")]);
+
     const setUp = async () => {
+
       const localTheme = localStorage.getItem("theme");
       const localPage = Number(localStorage.getItem("page"));
       const localDataBooks = JSON.parse(localStorage.getItem("book"));
@@ -49,12 +108,11 @@ function App() {
       } else {
         setCurrentPage(localPage);
       }
-
       if (!localDataBooks) {
         setDataBooks([...initialDataBooks]);
         setDataBooksShow([...initialDataBooks]);
         localStorage.setItem(
-          "book-store",
+          "book",
           JSON.stringify([...initialDataBooks])
         );
       } else {
@@ -66,6 +124,11 @@ function App() {
     setUp();
 
   }, []);
+
+  const handleLanguageChange = (newLanguage) => {
+    setCurrentLanguage(newLanguage);
+  };
+
   const handleToggleCreateModal = () => {
     if (!isShowModalCreate) {
       setNewBook({
@@ -189,7 +252,7 @@ function App() {
       <Main currentLanguage={currentLanguage} onLanguageChange={handleLanguageChange}>
         <div className={`store-actions row row-end theme-${theme}`}>
           <Search onChangeKeyword={handleSearch} />
-          <Button title={currentLanguage === "en" ? translations.en.addbook : translations.vi.addbook} handleClick={handleToggleCreateModal} />
+          <Button title={getTranslation("addbook")} handleClick={handleToggleCreateModal} />
         </div>
         <div className={`store-data row theme-${theme}`}>
           <Table
@@ -207,10 +270,10 @@ function App() {
 
       {/* Modal Create Book */}
       {isShowModalCreate && (
-        <Modal title="Add Book" handleToggleModal={handleToggleCreateModal}>
+        <Modal title={getTranslation("addbook")} handleToggleModal={handleToggleCreateModal}>
           <div className={`modal-content theme-${theme}`}>
             <form action="">
-              <label htmlFor="input__name">Name</label>
+              <label htmlFor="input__name">{getTranslation("name")}</label>
               <input
                 id="input__name"
                 type="text"
@@ -222,7 +285,7 @@ function App() {
                   setNewBook({ ...newBook, name: event.target.value })
                 }
               />
-              <label htmlFor="input__author">Author</label>
+              <label htmlFor="input__author">{getTranslation("author")}</label>
               <input
                 id="input__author"
                 type="text"
@@ -234,7 +297,7 @@ function App() {
                   setNewBook({ ...newBook, author: event.target.value })
                 }
               />
-              <label htmlFor="input__topic">Topic</label>
+              <label htmlFor="input__topic">{getTranslation("topic")}</label>
               <select
                 id="input__topic"
                 name="topic"
@@ -257,7 +320,7 @@ function App() {
           <div className="modal-footer">
             <div className="footer__action">
               <Button
-                title={currentLanguage === "en" ? translations.en.create : translations.vi.create}
+                title={getTranslation("create")}
                 handleClick={() => handleCreateBook(newBook)}
               ></Button>
             </div>
@@ -270,7 +333,7 @@ function App() {
         <Modal title="Edit Book" handleToggleModal={handleToggleEditModal}>
           <div className={`modal-content theme-${theme}`}>
             <form action="">
-              <label htmlFor="input__name">Name</label>
+              <label htmlFor="input__name">{getTranslation("name")}</label>
               <input
                 id="input__name"
                 type="text"
@@ -286,7 +349,7 @@ function App() {
                   })
                 }
               />
-              <label htmlFor="input__author">Author</label>
+              <label htmlFor="input__author">{getTranslation("author")}</label>
               <input
                 id="input__author"
                 type="text"

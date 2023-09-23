@@ -21,7 +21,7 @@ const Table = ({ currentPage, dataTitle, data, handleActions }) => {
 
   const handleChangePage = (page) => {
     handleActions[0](page);
-    localStorage.setItem("page-store", page.toString());
+    localStorage.setItem("page", page.toString());
   };
 
   return (
