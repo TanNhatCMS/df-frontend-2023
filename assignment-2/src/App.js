@@ -250,7 +250,7 @@ function App() {
       <Notification />
 
       <Main currentLanguage={currentLanguage} onLanguageChange={handleLanguageChange}>
-        <div className={`store-actions row row-end theme-${theme}`}>
+        <div className={`store-actions actions row row-end theme-${theme}`}>
           <Search onChangeKeyword={handleSearch} />
           <Button title={getTranslation("addbook")} handleClick={handleToggleCreateModal} />
         </div>

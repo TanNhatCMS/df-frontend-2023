@@ -1,4 +1,3 @@
-/* Itilities  CSS*/
 .row {
   margin: 24px 0 0;
   padding: 0 12px;
@@ -9,6 +8,10 @@
 .row-end {
   justify-content: end;
   gap: 12px;
+}
+
+.actions {
+  justify-content: space-between;
 }
 
 .modal-content label {
@@ -45,7 +48,7 @@
   gap: 32px;
 }
 
-/* Theme: Dark */
+
 .row.theme-dark {
   background-color: #444956;
 }
@@ -84,10 +87,8 @@
 
 .toggle-switch.off {
   background-color: #ccc;
-  /* Gray background when the switch is off */
 }
 
 .toggle-switch.on .slider {
   transform: translateX(19px);
-  /* Move the slider to the right when on */
 }
