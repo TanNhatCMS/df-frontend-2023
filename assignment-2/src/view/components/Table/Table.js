@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { useState, useEffect } from "react";
+import { getThemeMode } from '../../../utils/functions'
 import Pagination from "../Pagination/Pagination";
 import styles from "./Table.module.css";
 
 const Table = ({ currentPage, dataTitle, data, handleActions }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useState(getThemeMode);
   const dataLength = data.length;
   const limitPage = 5;
 
