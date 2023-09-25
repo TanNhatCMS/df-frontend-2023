@@ -404,11 +404,6 @@ window.addEventListener("beforeunload", function (e) {
         history.replaceState(null, null, newURL);
     }
 });
-
-
-
-
-
 // Chạy sau khi trang web đã tải hoàn toàn
 document.addEventListener("DOMContentLoaded", function () {
     // Đọc trang hiện tại từ URL nếu có
