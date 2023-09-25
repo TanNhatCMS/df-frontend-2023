@@ -246,7 +246,7 @@ function App() {
     localStorage.setItem("page", "1");
   };
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContext>
       <Notification />
 
       <Main currentLanguage={currentLanguage} onLanguageChange={handleLanguageChange}>
@@ -440,7 +440,7 @@ function App() {
           </div>
         </Modal>
       )}
-    </ThemeContext.Provider>
+    </ThemeContext>
   );
 }
 export default App;
