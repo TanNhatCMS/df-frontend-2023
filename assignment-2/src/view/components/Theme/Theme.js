@@ -1,9 +1,12 @@
-import { useContext, useEffect } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { useState } from "react";
 import styles from "./Theme.module.css";
-
+import { useTheme } from '../../contexts/ThemeContext'
 const Theme = () => {
-  const { theme, setTheme } = useContext(ThemeContext);
+  const { theme, setTheme } = useTheme()
+
+  if (!theme) {
+    return null
+  }
 
   const handleSwitchTheme = () => {
     if (theme === "light") {
