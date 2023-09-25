@@ -13,16 +13,8 @@
     <header class="header">
         <a data-i18n="titleSite" href="#" class="logo">Bookstore</a>
         <div class="user-info">
-            <img class="user-avatar" src="./assets/images/user.png" alt="Avatar người dùng" />
-            <h1 class="user-name">Tân Nhật CMS</h1>
-            <!-- Inside the header section -->
-            <div class="theme-toggle">
-                <input type="checkbox" id="theme-switch" class="theme-switch">
-                <label for="theme-switch" class="theme-label">Dark Mode</label>
-            </div>
-
             <div id="language-dropdown" class="dropdown">
-                <button class="dropbtn">
+                <button class="drop btn">
                     <label data-i18n="language">English</label>
                 </button>
                 <div class="dropdown-content">
@@ -34,6 +26,13 @@
                     </a>
                 </div>
             </div>
+            <div class="theme-toggle">
+                <input type="checkbox" id="theme-switch" class="theme-switch">
+                <label for="theme-switch" class="theme-label">Dark Mode</label>
+            </div>
+            <img class="user-avatar" src="./assets/images/user.png" alt="Avatar người dùng" />
+            <h1 class="user-name">Tân Nhật CMS</h1>
+            <!-- Inside the header section -->
         </div>
     </header>
     <!-- Header end -->
@@ -94,9 +93,10 @@
                 <div class="modal-header">
                     <h1 data-i18n="addBook">Add book</h1>
                 </div>
-
                 <div class="modal-body">
                     <form class="form-add-book">
+                        <input type="hidden" id="id" name="id" value="" />
+                        <input type="hidden" id="act" name="act" value="new" />
                         <div class="form-group">
                             <label data-i18n="nameLabel" for="name">Name</label>
                             <input required autocomplete="off" type="text" class="form-control" id="name" name="name"
@@ -111,6 +111,7 @@
                             <label data-i18n="topicLabel" for="topic">Topic</label>
                             <select class="form-control select" id="topic" name="topic"
                                 data-icon="ion-chevron-expand-outline">
+                                <option data-i18n="selectTopic" value="">Select topic</option>
                                 <option value="Programming">Programming</option>
                                 <option value="Database">Database</option>
                                 <option value="Devops">Devops</option>
@@ -126,46 +127,6 @@
             </div>
         </div>
         <!-- Form add book end -->
-        <!-- Form Edit Book Start -->
-        <div class="container-modal edit-modal">
-            <div class="modal edit-book-modal">
-                <button type="button" class="close-btn" id="close-modal-edit" data-dismiss="modal"
-                    aria-label="Close">X</button>
-                <div class="modal-header">
-                    <h1 data-i18n="editBook">Edit book</h1>
-                </div>
-                <div class="modal-body">
-                    <form class="form-edit-book">
-                        <div class="form-group">
-                            <label data-i18n="nameLabel" for="names">Name</label>
-                            <input required autocomplete="off" type="text" class="form-control" id="names" name="names"
-                                placeholder="Tên sách" />
-                        </div>
-                        <div class="form-group">
-                            <label data-i18n="authorLabel" for="authors">Author</label>
-                            <input required autocomplete="off" type="text" class="form-control" id="authors"
-                                name="authors" placeholder="Tác giả" />
-                        </div>
-                        <div class="form-group">
-                            <label data-i18n="topicLabel" for="topics">Topic</label>
-                            <select class="form-control select" id="topics" name="topics"
-                                data-icon="ion-chevron-expand-outline">
-                                <option value="Programming">Programming</option>
-                                <option value="Database">Database</option>
-                                <option value="Devops">Devops</option>
-                                <option value="Frontend">Frontend</option>
-                                <option value="Backend">Backend</option>
-                            </select>
-                        </div>
-                        <div class="footer-form">
-                            <button type="submit" class="btn btn-success">Save</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Form edit book end -->
-
     </main>
     <div class="pagination-container">
         <div id="pagination-numbers"></div>

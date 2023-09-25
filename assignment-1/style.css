@@ -350,19 +350,6 @@ th {
     display: block;
 }
 
-.edit-book {
-    margin-right: 15px;
-    color: #ffc107;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.delete-book {
-    color: #dc3545;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
 .header {
     background-color: #fff;
     display: flex;
@@ -388,6 +375,28 @@ header span {
     align-items: center;
     justify-content: center;
     z-index: 1
+}
+
+.edit-book-button {
+    color: #fff;
+    background-color: #28a745;
+    border: none;
+    margin: .25rem;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: .2rem;
+}
+
+.delete-book-button {
+    color: #fff;
+    background-color: #dc3545;
+    border: none;
+    margin: .25rem;
+    cursor: pointer;
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: .2rem
 }
 
 .pagination-number,
