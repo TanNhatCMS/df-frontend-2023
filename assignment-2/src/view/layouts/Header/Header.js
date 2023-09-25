@@ -1,11 +1,11 @@
-import { useContext } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
+import { useState } from "react";
+import { getThemeMode } from '../../../utils/functions'
 import Theme from "../../components/Theme/Theme";
 import Account from "../../components/Account/Account";
 import "./Header.css";
 
 const Header = ({ currentLanguage, onLanguageChange }) => {
-  const { theme } = useContext(ThemeContext);
+  const { theme } = useState(getThemeMode)
 
   return (
     <header id="header" className={`theme-${theme}`}>
