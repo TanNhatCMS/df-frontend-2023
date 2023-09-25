@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Bookstore</title>
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link href="style.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -13,17 +13,13 @@
     <header class="header">
         <a data-i18n="titleSite" href="#" class="logo">Bookstore</a>
         <div class="user-info">
-            <div id="language-dropdown" class="dropdown">
+            <div class="dropdown" id="language-dropdown">
                 <button class="drop btn">
                     <label data-i18n="language">English</label>
                 </button>
                 <div class="dropdown-content">
-                    <a href="#" id="english-button">
-                        English
-                    </a>
-                    <a href="#" id="vietnamese-button">
-                        Tiếng Việt
-                    </a>
+                    <a href="#" id="english-button">English</a>
+                    <a href="#" id="vietnamese-button">Tiếng Việt</a>
                 </div>
             </div>
             <div class="theme-toggle">
@@ -63,9 +59,7 @@
         <!-- Notification Delete Book start -->
         <div class="container-modal delete-modal">
             <div class="modal delete-book-modal">
-                <button type="button" class="close-btn" id="close-btn-delete" data-dismiss="modal" aria-label="Close">
-                    <ion-icon class="close-icon" name="close-outline"></ion-icon>
-                </button>
+                <button type="button" class="close-btn" id="close-btn-delete" data-dismiss="modal">X</button>
                 <div class="modal-header">
                     <h1 data-i18n="deleteBook">Delete book</h1>
                 </div>
@@ -88,8 +82,7 @@
         <!-- Form Add Book Start -->
         <div class="container-modal add-modal">
             <div class="modal add-book-modal">
-                <button type="button" class="close-btn" id="close-modal-add" data-dismiss="modal"
-                    aria-label="Close">x</button>
+                <button type="button" class="close-btn" id="close-modal-add" data-dismiss="modal">x</button>
                 <div class="modal-header">
                     <h1 data-i18n="addBook">Add book</h1>
                 </div>
