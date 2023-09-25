@@ -1,18 +1,20 @@
 import React, { useEffect } from "react";
 import "./LanguageSwitcher.module.css";
+import { useTranslation } from 'react-i18next';
 
 
 
 const LanguageSwitcher = ({ currentLanguage, onLanguageChange }) => {
-
+  const { i18n } = useTranslation();
   const handleLanguageChange = () => {
     const newLanguage = currentLanguage === "en" ? "vi" : "en";
     onLanguageChange(newLanguage);
-    localStorage.setItem("currentLanguage", newLanguage);
+    i18n.changeLanguage(newLanguage);
+    localStorage.setItem("language", newLanguage);
   };
 
   useEffect(() => {
-    const storedLanguage = localStorage.getItem("currentLanguage");
+    const storedLanguage = localStorage.getItem("language");
     if (storedLanguage) {
       onLanguageChange(storedLanguage);
     }
