@@ -398,13 +398,24 @@ function updateURLWithoutReloading() {
     // Thay đổi URL mà không tải lại trang
     history.pushState(null, null, newURL);
 }
+window.addEventListener("beforeunload", function (e) {
+    if (currentPage !== undefined) {
+        const newURL = window.location.pathname + "?page=" + currentPage;
+        history.replaceState(null, null, newURL);
+    }
+});
+
+
+
+
+
 // Chạy sau khi trang web đã tải hoàn toàn
 document.addEventListener("DOMContentLoaded", function () {
     // Đọc trang hiện tại từ URL nếu có
     const urlParams = new URLSearchParams(window.location.search);
     const pageParam = urlParams.get("page");
     totalPages = Math.ceil(getBookStore().length / itemsPerPage);
-    if (pageParam && pageParam < totalPages) {
+    if (pageParam && pageParam <= totalPages) {
         currentPage = parseInt(pageParam);
         displayBooks(allBooks, currentPage);
     } else {
