@@ -13,7 +13,7 @@ export function useTheme() {
 }
 
 export const ThemeContext = ({ children }) => {
-    const [colorMode, SetColorMode] = useState(getThemeMode)
+    const [theme, setThemeMode] = useState(getThemeMode)
 
     const updateThemeMode = (theme) => {
         const root = window.document.documentElement
@@ -35,22 +35,22 @@ export const ThemeContext = ({ children }) => {
         )
     }
 
-    const setThemeMode = (theme) => {
-        SetColorMode(theme)
+    const setTheme = (theme) => {
+        setThemeMode(theme)
         localStorage.setItem('theme', theme)
         updateThemeMode(theme)
     }
 
     useEffect(() => {
-        updateThemeMode(colorMode)
+        updateThemeMode(theme)
     }, [])
 
     const context = useMemo(
         () => ({
-            colorMode,
-            setThemeMode,
+            theme,
+            setTheme,
         }),
-        [colorMode],
+        [theme],
     )
 
     return <styleContext.Provider value={context}>{children}</styleContext.Provider>
