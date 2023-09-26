@@ -1,15 +1,18 @@
 import React, { useEffect } from "react";
 import "./LanguageSwitcher.module.css";
 import { useTranslation } from 'react-i18next';
-
+import '../../../utils/i18n';
 
 
 const LanguageSwitcher = ({ currentLanguage, onLanguageChange }) => {
   const { i18n } = useTranslation();
+  const changeLanguage = (language) => {
+    i18n.changeLanguage(language);
+  };
   const handleLanguageChange = () => {
     const newLanguage = currentLanguage === "en" ? "vi" : "en";
     onLanguageChange(newLanguage);
-    i18n.changeLanguage(newLanguage);
+    changeLanguage(newLanguage);
     localStorage.setItem("language", newLanguage);
   };
 
