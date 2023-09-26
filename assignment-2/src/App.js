@@ -6,10 +6,13 @@ import Modal from "./view/components/Modal/Modal";
 import Notification from './view/components/Notification/Notification';
 import initialDataBooks from "./database/book-store";
 import { ThemeContext } from "./view/contexts/ThemeContext";
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from './view/components/LanguageSwitcher/LanguageSwitcher';
 import "./App.css";
 import { useEffect, useState } from "react";
 
 function App() {
+  const { t } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const [theme, setTheme] = useState("");
   const [isShowModalCreate, setIsShowModalCreate] = useState(false);
@@ -24,62 +27,8 @@ function App() {
   const [currentBookEdit, setCurrentBookEdit] = useState({});
   const [currentBookDelete, setCurrentBookDelete] = useState({});
 
-  const english = {
-    language: "English",
-    titleSite: "BookStore",
-    addbook: "Add Book",
-    create: "Create",
-    cancel: "Cancel",
-    searchbook: "Search Book",
-    namePlaceholder: "Enter Name Book",
-    authorPlaceholder: "Enter Author Book",
-    modalTitle: "Add New Book",
-    name: "Name",
-    edit: "Edit",
-    delete: "Delete",
-    author: "Author",
-    topic: "Topic",
-    action: "Action",
-    confirm: "Confirm",
-    close: "Close",
-    id: "#",
-    selectTopic: "Select Topic",
-    editBook: "Edit Book",
-    saveBook: "Save Book",
-    deleteBook: "Delete Book",
-    deleteBookConfirmation: "Do you want to delete ",
-  };
-  const vietnamese = {
-    language: "Tiếng Việt",
-    titleSite: "Cửa hàng sách",
-    addbook: "Thêm Sách",
-    create: "Thêm Sách",
-    cancel: "Hủy",
-    searchbook: "Tìm Sách",
-    namePlaceholder: "Nhập tên sách",
-    authorPlaceholder: "Nhập tác giả",
-    modalTitle: "Thêm Sách Mới",
-    name: "Tên Sách",
-    edit: "Sửa",
-    delete: "Xoá",
-    author: "Tác giả",
-    topic: "Chủ đề",
-    action: "Hành động",
-    confirm: "Xác nhận",
-    close: "Đóng",
-    id: "STT",
-    selectTopic: "Chọn chủ đề",
-    editBook: "Sửa thông tin sách",
-    saveBook: "Lưu",
-    deleteBook: "Xoá sách",
-    deleteBookConfirmation: "Bạn có muốn xóa ",
-  };
   function getTranslation(key) {
-    if (currentLanguage === "en") {
-      return english[key] || key;
-    } else {
-      return vietnamese[key] || key;
-    }
+    return t(key);
   };
 
   useEffect(() => {
