@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import "./LanguageSwitcher.module.css";
+import { useEffect } from "react";
 import { useTranslation } from 'react-i18next';
-import '../../../utils/i18n';
-
+import '../../utils/i18n';
+import "../../style/LanguageSwitcher.css";
 
 const LanguageSwitcher = ({ currentLanguage, onLanguageChange }) => {
   const { i18n } = useTranslation();

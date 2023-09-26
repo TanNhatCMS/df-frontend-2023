@@ -1,26 +1,24 @@
-import Main from "./view/layouts/Main/Main";
-import Search from "./view/components/Search/Search";
-import Button from "./view/components/Button/Button";
-import Table from "./view/components/Table/Table";
-import Modal from "./view/components/Modal/Modal";
-import Notification from './view/components/Notification/Notification';
-import initialDataBooks from "./database/book-store";
-import { ThemeContext } from "./view/contexts/ThemeContext";
-import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from './view/components/LanguageSwitcher/LanguageSwitcher';
-import "./App.css";
 import { useEffect, useState } from "react";
+import { useTranslation } from 'react-i18next';
+import { ThemeContext } from "./view/context";
+import Main from "./view/components/Main";
+import Search from "./view/components/Search";
+import Button from "./view/components/Button";
+import Table from "./view/components/Table";
+import Modal from "./view/components/Modal";
+import Notification from './view/components/Notification';
+import initialDataBooks from "./database/book-store";
+import "./style/App.css";
 
 function App() {
+  const [theme, setTheme] = useState("");
   const { t } = useTranslation();
   const [currentLanguage, setCurrentLanguage] = useState("en");
-  const [theme, setTheme] = useState("");
   const [isShowModalCreate, setIsShowModalCreate] = useState(false);
   const [isShowModalEdit, setIsShowModalEdit] = useState(false);
   const [isShowModalDelete, setIsShowModalDelete] = useState(false);
   const [isHoverDelete, setIsHoverDelete] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [dataTitle, setTitle] = useState([]);
   const [dataBooks, setDataBooks] = useState([]);
   const [dataBooksShow, setDataBooksShow] = useState([]);
   const [newBook, setNewBook] = useState({});
@@ -30,26 +28,25 @@ function App() {
   function getTranslation(key) {
     return t(key);
   };
-
   useEffect(() => {
-    const storedLanguage = localStorage.getItem("currentLanguage");
+    const localTheme = localStorage.getItem("theme");
+    if (!localTheme) {
+      setTheme("light");
+      localStorage.setItem("theme", "light");
+    } else {
+      setTheme(localTheme);
+    }
+  }, [setTheme]);
+  useEffect(() => {
+    const storedLanguage = localStorage.getItem("language");
     if (storedLanguage) {
       setCurrentLanguage(storedLanguage);
     }
-    setTitle([getTranslation("id"), getTranslation("name"), getTranslation("author"), getTranslation("topic"), getTranslation("action")]);
-
+  }, [setCurrentLanguage]);
+  useEffect(() => {
     const setUp = async () => {
-
-      const localTheme = localStorage.getItem("theme");
       const localPage = Number(localStorage.getItem("page"));
       const localDataBooks = JSON.parse(localStorage.getItem("book"));
-
-      if (!localTheme) {
-        setTheme("light");
-        localStorage.setItem("theme", "light");
-      } else {
-        setTheme(localTheme);
-      }
 
       if (!localPage) {
         setCurrentPage(1);
@@ -195,10 +192,9 @@ function App() {
     localStorage.setItem("page", "1");
   };
   return (
-    <ThemeContext>
-      <Notification />
-
+  <ThemeContext.Provider value={{ theme, setTheme }}>
       <Main currentLanguage={currentLanguage} onLanguageChange={handleLanguageChange}>
+              <Notification />
         <div className={`store-actions actions row row-end theme-${theme}`}>
           <Search onChangeKeyword={handleSearch} />
           <Button title={getTranslation("addbook")} handleClick={handleToggleCreateModal} />
@@ -206,7 +202,6 @@ function App() {
         <div className={`store-data row theme-${theme}`}>
           <Table
             currentPage={currentPage}
-            dataTitle={dataTitle}
             data={dataBooksShow}
             handleActions={[
               setCurrentPage,
@@ -215,40 +210,40 @@ function App() {
             ]}
           />
         </div>
-      </Main>
+    
 
       {/* Modal Create Book */}
       {isShowModalCreate && (
-        <Modal title={getTranslation("addbook")} handleToggleModal={handleToggleCreateModal}>
+        <Modal title={t("addbook")} handleToggleModal={handleToggleCreateModal}>
           <div className={`modal-content theme-${theme}`}>
             <form action="">
-              <label htmlFor="input__name">{getTranslation("name")}</label>
+              <label htmlFor="name">{t("name")}</label>
               <input
-                id="input__name"
+                id="name"
                 type="text"
                 name="name"
-                placeholder="Enter book's name ..."
+                placeholder={t("namePlaceholder")}
                 autoComplete="on"
                 value={newBook.name}
                 onChange={(event) =>
                   setNewBook({ ...newBook, name: event.target.value })
                 }
               />
-              <label htmlFor="input__author">{getTranslation("author")}</label>
+              <label htmlFor="input__author">{t("author")}</label>
               <input
-                id="input__author"
+                id="author"
                 type="text"
                 name="author"
-                placeholder="Enter book's author ..."
+                placeholder={t("authorPlaceholder")}
                 autoComplete="on"
                 value={newBook.author}
                 onChange={(event) =>
                   setNewBook({ ...newBook, author: event.target.value })
                 }
               />
-              <label htmlFor="input__topic">{getTranslation("topic")}</label>
+              <label htmlFor="topic">{t("topic")}</label>
               <select
-                id="input__topic"
+                id="topic"
                 name="topic"
                 value={newBook.topic}
                 onChange={(event) =>
@@ -256,7 +251,7 @@ function App() {
                 }
               >
                 <option value="" disabled hidden>
-                  Select book's topic
+                  {t("selectTopic")}
                 </option>
                 <option value="Programming">Programming</option>
                 <option value="Database">Database</option>
@@ -282,13 +277,12 @@ function App() {
         <Modal title="Edit Book" handleToggleModal={handleToggleEditModal}>
           <div className={`modal-content theme-${theme}`}>
             <form action="">
-              <label htmlFor="input__name">{getTranslation("name")}</label>
+              <label htmlFor="name">{getTranslation("name")}</label>
               <input
-                id="input__name"
+                id="name"
                 type="text"
                 name="name"
-                title="Please enter book name"
-                placeholder="Enter book's name ..."
+                placeholder={t("namePlaceholder")}
                 autoComplete="on"
                 value={currentBookEdit.name}
                 onChange={(event) =>
@@ -298,12 +292,12 @@ function App() {
                   })
                 }
               />
-              <label htmlFor="input__author">{getTranslation("author")}</label>
+              <label htmlFor="author">{t("author")}</label>
               <input
-                id="input__author"
+                id="author"
                 type="text"
                 name="author"
-                placeholder="Enter book's author ..."
+                placeholder={t("authorPlaceholder")}
                 autoComplete="on"
                 value={currentBookEdit.author}
                 onChange={(event) =>
@@ -313,9 +307,9 @@ function App() {
                   })
                 }
               />
-              <label htmlFor="input__topic">Topic</label>
+              <label htmlFor="topic">{t("topic")}</label>
               <select
-                id="input__topic"
+                id="topic"
                 name="topic"
                 value={currentBookEdit.topic}
                 onChange={(event) =>
@@ -325,9 +319,6 @@ function App() {
                   })
                 }
               >
-                <option value="" disabled hidden>
-                  Select book's topic
-                </option>
                 <option value="Programming">Programming</option>
                 <option value="Database">Database</option>
                 <option value="Devops">Devops</option>
@@ -349,9 +340,9 @@ function App() {
 
       {/* Modal Delete Book */}
       {isShowModalDelete && (
-        <Modal title="Delete Book" handleToggleModal={handleToggleDeleteModal}>
+        <Modal title={t("deleteBook")} handleToggleModal={handleToggleDeleteModal}>
           <div className={`modal-content content-center  theme-${theme}`}>
-            <span>Do you want to delete the book named</span>
+            <span>{t("deleteBookConfirmation")}</span>
             <br />
             <span>
               <b>{currentBookDelete.name}</b> ?
@@ -362,7 +353,7 @@ function App() {
               <Button
                 option={true}
                 selected={isHoverDelete}
-                title="Delete"
+                title={t("delete")}
                 handleClick={() => handleDeleteBook(currentBookDelete)}
                 handleHover={() => {
                   if (!isHoverDelete) {
@@ -370,12 +361,12 @@ function App() {
                   }
                 }}
               >
-                Delete
+                {t("delete")}
               </Button>
               <Button
                 option={true}
                 selected={!isHoverDelete}
-                title="Cancel"
+                title={t("cancel")}
                 handleClick={handleToggleDeleteModal}
                 handleHover={() => {
                   if (isHoverDelete) {
@@ -383,13 +374,14 @@ function App() {
                   }
                 }}
               >
-                Cancel
+                {t("cancel")}
               </Button>
             </div>
           </div>
         </Modal>
       )}
-    </ThemeContext>
+      </Main>
+      </ThemeContext.Provider>
   );
 }
 export default App;

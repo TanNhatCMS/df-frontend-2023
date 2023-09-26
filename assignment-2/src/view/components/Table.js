@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
-import { getThemeMode } from '../../../utils/functions'
-import Pagination from "../Pagination/Pagination";
-import styles from "./Table.module.css";
+import { useState, useEffect, useContext} from "react";
+import { useTranslation } from 'react-i18next';
+import Pagination from "./Pagination";
+import styles from "../../style/Table.module.css";
+import { ThemeContext } from '../../view/context';
 
-const Table = ({ currentPage, dataTitle, data, handleActions }) => {
-  const { theme } = useState(getThemeMode);
+const Table = ({ currentPage, data, handleActions }) => {
+  const { theme} = useContext(ThemeContext);
+  const { t } = useTranslation();
   const dataLength = data.length;
   const limitPage = 5;
 
@@ -29,9 +31,11 @@ const Table = ({ currentPage, dataTitle, data, handleActions }) => {
       <table>
         <thead>
           <tr>
-            {dataTitle.map((title, index) => (
-              <th key={index}>{title}</th>
-            ))}
+            <th key="0">{t("id")}</th>
+            <th key="1">{t("name")}</th>
+            <th key="2">{t("author")}</th>
+            <th key="3">{t("topic")}</th>
+            <th key="4">{t("action")}</th>
           </tr>
         </thead>
         <tbody>
@@ -47,10 +51,10 @@ const Table = ({ currentPage, dataTitle, data, handleActions }) => {
                     {item.id && (
                       <>
                         <button onClick={() => handleActions[1](item.id)}>
-                          Edit
+                        {t("edit")}
                         </button>
                         <button onClick={() => handleActions[2](item.id)}>
-                          Delete
+                        {t("delete")}
                         </button>
                       </>
                     )}

@@ -57,8 +57,7 @@
     background-color: transparent;
 }
 
-/* Theme: Dark */
 .modal-container.theme-dark>div {
     color: white;
-    background-color: #444956;
+    background-color: #23252c;
 }

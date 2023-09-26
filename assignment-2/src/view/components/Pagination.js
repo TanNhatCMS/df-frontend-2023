@@ -1,10 +1,10 @@
-import { useState } from "react";
-import { getThemeMode } from '../../../utils/functions'
+import { useContext } from "react";
 import PaginationItem from "./PaginationItem";
-import styles from "./Pagination.module.css";
+import styles from "../../style/Pagination.module.css";
+import { ThemeContext } from '../../view/context';
 
 const Pagination = ({ currentPage, total, limit, onPageChange }) => {
-  const { theme } = useState(getThemeMode);
+  const { theme} = useContext(ThemeContext);
   const pageCount = Math.ceil(total / limit);
   if (pageCount <= 1) {
     return null; // Ẩn pagination nếu chỉ có một trang

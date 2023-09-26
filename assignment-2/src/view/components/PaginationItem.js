@@ -1,4 +1,4 @@
-import styles from "./Pagination.module.css";
+import styles from "../../style/Pagination.module.css";
 
 const PaginationItem = ({ page, selected, handleClick, children }) => {
   return (

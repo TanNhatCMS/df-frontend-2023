@@ -1,6 +1,8 @@
-import styles from "./Search.module.css";
+import styles from "../../style/Search.module.css";
+import { useTranslation } from 'react-i18next';
 
 const Search = ({ onChangeKeyword }) => {
+  const { t } = useTranslation();
   return (
     <div className={`${styles["search"]}`}>
       <form>
@@ -9,7 +11,7 @@ const Search = ({ onChangeKeyword }) => {
           type="text"
           name="search__keyword"
           autoComplete="on"
-          placeholder="Search book ..."
+          placeholder={t("searchbook")}
           onChange={(event) => onChangeKeyword(event.target.value)}
         ></input>
       </form>

@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { getThemeMode } from '../../../utils/functions'
-import Header from "../Header/Header";
-import "./Main.css";
-import LanguageSwitcher from '../../components/LanguageSwitcher/LanguageSwitcher';
+import { useContext } from "react";
+import Header from "./Header";
+import "../../style/Main.css";
+import LanguageSwitcher from './LanguageSwitcher';
+import { ThemeContext } from '../../view/context';
 const Main = ({ currentLanguage, onLanguageChange, children }) => {
-  const [theme] = useState(getThemeMode)
+  const { theme} = useContext(ThemeContext);
+
   return (
-    <> <Header currentLanguage={currentLanguage} onLanguageChange={onLanguageChange} ></Header>
+    <> <Header></Header>
       <main id="main" className={`theme-${theme}`}>
         {children}
 

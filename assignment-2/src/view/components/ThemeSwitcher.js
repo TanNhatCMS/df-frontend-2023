@@ -1,12 +1,19 @@
-import { useState } from "react";
-import styles from "./Theme.module.css";
-import { useTheme } from '../../contexts/ThemeContext'
-const Theme = () => {
-  const { theme, setTheme } = useTheme()
+import React, { useContext, useEffect } from 'react';
+import { ThemeContext } from '../context';
+import styles from "../../style/ThemeSwitcher.module.css";
 
-  if (!theme) {
-    return null
-  }
+const ThemeSwitcher = () => {
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+      const localTheme = localStorage.getItem("theme");
+      if (!localTheme) {
+        setTheme("light");
+        localStorage.setItem("theme", "light");
+      } else {
+        setTheme(localTheme);
+      }
+  });
 
   const handleSwitchTheme = () => {
     if (theme === "light") {
@@ -17,7 +24,6 @@ const Theme = () => {
       localStorage.setItem("theme", "light");
     }
   };
-
   return (
     <div className={`${styles["theme"]}`}>
       <label className={styles["switch"]}>
@@ -28,6 +34,6 @@ const Theme = () => {
     </div>
 
   );
-};
 
-export default Theme;
+};
+export default ThemeSwitcher;
