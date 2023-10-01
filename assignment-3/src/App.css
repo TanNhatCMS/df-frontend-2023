@@ -1,38 +1,254 @@
+:root {
+	--primary-button-color: #d2455a;
+	--primary-button-color-dark: #c33232;
+	--primary-button-color-hover: #b40000;
+	--primary-button-color-hover-dark: #da5d6b;
+	--secondary-button-color: #e0e0e0;
+	--secondary-button-color-dark: #e6e6e6;
+	--secondary-button-color-hover: #c2c2c2;
+	--secondary-button-color-hover-dark: #cecece;
+	--primary-color: #fefefe;
+	--primary-color-dark: #282828;
+	--secondary-color: #f7f8f9;
+	--secondary-color-dark: #3f3f3f;
+	--border-color: #c9d4dd;
+	--border-color-dark: #717171;
+	--outlay-color: rgba(152, 152, 152, 0.114);
+	--font-close-button: 2rem;
+	--modal-padding: 2rem;
+}
+#root {
+	height: 100%;
+	width: 100%;
+}
 .App {
-  text-align: center;
+	height: 100%;
+	width: 100%;
+}
+html {
+	height: 100%;
+	width: 100%;
+}
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	transition: background-color 0.5s linear;
+}
+body {
+	height: 100%;
+}
+select {
+	margin: 0;
+	padding: 0;
+}
+main {
+	background-color: var(--secondary-color);
+	height: calc(100% - 58px);
+}
+main.dark {
+	background-color: var(--secondary-color-dark);
+}
+.standard-height-element {
+	padding: 10px;
+	border-radius: 5px;
+}
+#handle-data-bar {
+	text-align: right;
+	padding: 20px 0;
+}
+section {
+	padding-inline: 1rem;
+	height: 100%;
+}
+#wrapper-table {
+	height: 70%;
+}
+.primary {
+	background-color: var(--primary-button-color);
+	border: 0;
+
+	color: #fff;
+	width: 80px;
+}
+.primary:hover {
+	background-color: var(--primary-button-color-hover);
+	cursor: pointer;
+}
+.primary.dark {
+	background-color: var(--primary-button-color-dark);
+}
+.primary.dark:hover {
+	background-color: var(--primary-button-color-hover-dark);
+}
+header {
+	color: #000;
+	background-color: var(--primary-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 0;
+	padding-inline: 1rem;
+	height: 58px;
+	border-bottom: var(--border-color) 2px solid;
+}
+header.dark {
+	background-color: var(--primary-color-dark);
+	color: #fff;
+	border-bottom: var(--border-color-dark) 2px solid;
+}
+#avatar {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+}
+#personal {
+	display: flex;
+	width: 100px;
+	white-space: nowrap;
+	align-items: center;
+	gap: 5%;
+}
+table {
+	border: 1px solid;
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+	box-sizing: border-box;
+}
+th,
+td {
+	border: var(--border-color) 2px solid;
+	border-collapse: collapse;
+	padding: 15px;
+	text-align: left;
+	background-color: var(--primary-color);
+}
+th.dark,
+td.dark {
+	border: var(--border-color-dark) 2px solid;
+	background-color: var(--primary-color-dark);
+	color: #c9d4dd;
+}
+td.dark a {
+	color: var(--primary-button-color-hover-dark);
+}
+th {
+	font-size: 1.25rem;
+}
+input {
+	border: var(--border-color) 2px solid;
+}
+input.dark {
+	background-color: var(--primary-color-dark);
+	border: var(--border-color-dark) 2px solid;
+	color: #c9d4dd;
+}
+input + button {
+	margin-left: 10px;
+}
+select.dark {
+	background-color: var(--primary-color-dark);
+	border: var(--border-color-dark) 2px solid;
+	color: #c9d4dd;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.delete-button {
+	color: red;
+	text-decoration: underline;
+	background: none;
+	border: none;
+}
+.delete-button:hover {
+	cursor: pointer;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+.overlay {
+	
+	display: flex;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	bottom: 0;
+	justify-content: center;
+	align-items: center;
+	background: var(--outlay-color);
+	backdrop-filter: saturate(50%) blur(05px);
+}
+.modal {
+	padding: var(--modal-padding);
+	display: inline-block;
+	position: relative;
+	border-radius: 5px;
+	border: var(--border-color) 2px solid;
+	background-color: #fff;
+	box-shadow: 5px 5px 5px -1px rgba(0, 0, 0, 0.42);
+	width: 30%;
+}
+.modal.dark {
+	border: var(--border-color-dark) 2px solid;
+	background-color: var(--primary-color-dark);
+	color: #c9d4dd;
+	box-shadow: 5px 5px 5px -1px rgba(0, 0, 0, 0.42);
+}
+.modal h2 {
+	padding-bottom: 2rem;
+	align-items: center;
+}
+.close-button {
+	position: absolute;
+	right: 1rem;
+	top: 0.5rem;
+	background: none;
+	border: none;
+	font-size: var(--font-close-button);
+	font-weight: bold;
+	cursor: pointer;
+}
+.close-button.dark {
+	color: #c9d4dd;
+}
+button[type="submit"] {
+	float: right;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+#add-book-modal-overlay input,
+#add-book-modal-overlay select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: block;
+	border: var(--border-color) 2px solid;
+	border-radius: 4px;
+	box-sizing: border-box;
 }
 
-.App-link {
-  color: #61dafb;
+#delete-button {
+	background-color: var(--secondary-button-color);
+	border: 0;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#delete-button:hover {
+	background-color: var(--secondary-button-color-hover);
+	cursor: pointer;
+}
+#delete-modal-overlay article {
+	text-align: center;
+}
+#delete-modal-overlay p {
+	padding: 0 1rem 1rem;
+	width: 70%;
+	margin: 0 auto;
+}
+#button-group {
+	display: flex;
+	justify-content: space-evenly;
+}
+.delete-name {
+	font-weight: bold;
+	background: none;
+}
+.delete-name.dark {
+	color: #c9d4dd;
 }
