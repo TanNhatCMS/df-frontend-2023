@@ -75,6 +75,14 @@ function BookShowPage() {
               <PaginationWrapper data={itemBooks}>
                 <Table />
               </PaginationWrapper>
+              <footer>
+                <div className="copyright">
+                  &copy; 2023 || Made with TânNhậtCMS||
+                  <a href="https://github.com/TanNhatCMS/df-frontend-2023/tree/main/assignment-3">
+                    Source code
+                  </a>
+                </div>
+              </footer>
             </section>
             {isOpenModalAdd && <AddBookModal />}
             {ItemDelete && <DeleteBookModal />}
