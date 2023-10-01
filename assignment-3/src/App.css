@@ -17,31 +17,38 @@
 	--font-close-button: 2rem;
 	--modal-padding: 2rem;
 }
-#root {
-	height: 100%;
-	width: 100%;
-}
-.App {
-	height: 100%;
-	width: 100%;
-}
 html {
-	height: 100%;
-	width: 100%;
+    height: 100%;
+    width: 100%;
+    font-size: 16px;
 }
+
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
-	transition: background-color 0.5s linear;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
+
+::placeholder {
+    font-size: 16px;
+    font-weight: 600;
+
+}
+
 body {
-	height: 100%;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    padding: 0;
+    position: relative;
+    max-width: 75%;
+    margin: 0 auto
 }
+
 select {
 	margin: 0;
 	padding: 0;
 }
+
 main {
 	background-color: var(--secondary-color);
 	height: calc(100% - 58px);
@@ -54,8 +61,11 @@ main.dark {
 	border-radius: 5px;
 }
 #handle-data-bar {
-	text-align: right;
-	padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 24px;
+    border-bottom: 2px solid #c0ccd7;
 }
 section {
 	padding-inline: 1rem;
@@ -82,35 +92,43 @@ section {
 	background-color: var(--primary-button-color-hover-dark);
 }
 header {
-	color: #000;
-	background-color: var(--primary-color);
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px 0;
-	padding-inline: 1rem;
-	height: 58px;
-	border-bottom: var(--border-color) 2px solid;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 24px;
+    border-bottom: 2px solid #c0ccd7;
 }
 header.dark {
 	background-color: var(--primary-color-dark);
 	color: #fff;
 	border-bottom: var(--border-color-dark) 2px solid;
 }
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 #avatar {
-	width: 30px;
-	height: 30px;
-	border-radius: 50%;
+	width: 40px;
+    height: 40px;
+    background-color: #e2e8ec;
+    border-radius: 50%;
+    object-fit: cover;
 }
 #personal {
 	display: flex;
-	width: 100px;
-	white-space: nowrap;
-	align-items: center;
-	gap: 5%;
+    align-items: center;
+    gap: 12px;
+}
+#name {
+	font-size: 12px;
+    font-weight: 500;
 }
 table {
-	border: 1px solid;
+	border: 2px solid #c0ccd7;
 	border-collapse: collapse;
 	width: 100%;
 	table-layout: fixed;
