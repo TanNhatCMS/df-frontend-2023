@@ -62,7 +62,7 @@ function PaginationBar({
   const { theme } = useContext(ContextTheme)
 
   return (
-    <div className="pagination-wrapper">
+    <div className={`pagination-wrapper ${theme === 'dark' ? 'dark' : ''}`}>
       <button
         disabled={currentPage === 1}
         className={`pagination-button ${theme === 'dark' ? 'dark' : ''}`}

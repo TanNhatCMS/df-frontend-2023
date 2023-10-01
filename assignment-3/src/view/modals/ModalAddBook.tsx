@@ -17,9 +17,9 @@ function AddBookModal() {
   const { theme } = useContext(ContextTheme)
 
   const handleCloseEsc = useCallback(
-    (ev) => {
+    (ev: KeyboardEvent) => {
       ev.stopPropagation()
-      if (ev.keyCode === 27) {
+      if (ev.key === 'Escape') {
         setIsOpenModalAdd(false)
       }
     },
@@ -31,11 +31,12 @@ function AddBookModal() {
     return () => document.removeEventListener('keydown', handleCloseEsc)
   }, [handleCloseEsc])
 
-  const handleClose = (ev) => {
+  const handleClose = (ev: React.MouseEvent<HTMLElement>) => {
     ev.stopPropagation()
     if (ev.currentTarget === ev.target) setIsOpenModalAdd(false)
   }
-  const handleAdd = (ev) => {
+
+  const handleAdd = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault()
     const id = itemBooks.length + 1
     const newList = [

@@ -7,6 +7,11 @@ function Header() {
   const { theme, setTheme } = useContext(ContextTheme)
   function changeTheme() {
     const newTheme = theme === 'light' ? 'dark' : 'light'
+    if (theme === 'light') {
+      document.body.classList.add('dark')
+    } else {
+      document.body.classList.remove('dark')
+    }
     localStorage.setItem('theme', newTheme)
     setTheme(newTheme)
   }

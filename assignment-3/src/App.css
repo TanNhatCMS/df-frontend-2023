@@ -22,28 +22,32 @@ html {
     width: 100%;
     font-size: 16px;
 }
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+#root {
+	height: 100%;
+	width: 100%;
+}
+.App {
+	height: 100%;
+	width: 100%;
 }
 
-::placeholder {
-    font-size: 16px;
-    font-weight: 600;
-
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	transition: background-color 0.5s linear;
 }
 
 body {
-    background-color: #f0f0f0;
     font-family: Arial, sans-serif;
     padding: 0;
     position: relative;
-    max-width: 75%;
+ 
     margin: 0 auto
 }
-
+body.dark {
+	background-color: var(--secondary-color-dark);
+}
 select {
 	margin: 0;
 	padding: 0;

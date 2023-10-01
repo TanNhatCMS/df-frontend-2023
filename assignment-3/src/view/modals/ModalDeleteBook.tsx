@@ -14,40 +14,48 @@ function ModalDeleteBook() {
   const { theme } = useContext(ContextTheme)
 
   const handleCloseByEsc = useCallback(
-    (ev) => {
+    (ev: KeyboardEvent) => {
       ev.stopPropagation()
-      if (ev.keyCode === 27) {
+      if (ev.key === 'Escape') {
         setItemDelete(undefined)
       }
     },
     [setItemDelete],
   )
+
   useEffect(() => {
-    document.addEventListener('keydown', (ev) => handleCloseByEsc(ev))
-    return () =>
-      document.removeEventListener('keydown', (ev) => handleCloseByEsc(ev))
+    document.addEventListener('keydown', handleCloseByEsc)
+    return () => document.removeEventListener('keydown', handleCloseByEsc)
   }, [handleCloseByEsc])
 
-  const handleClose = (ev) => {
+  const handleClose = (ev: React.MouseEvent<HTMLElement>) => {
     ev.stopPropagation()
     if (ev.currentTarget === ev.target) {
       setItemDelete(undefined)
     }
   }
+
   const handleDelete = () => {
-    const { id } = ItemDelete!
-    const newList = itemBooks.filter((item) => item.id !== id)
-    setItemBooks(newList)
-    setItemDelete(undefined)
-    if (newList.length > 0)
-      localStorage.setItem('currentData', JSON.stringify(newList))
-    if (currentView.length < maxView && searchListBooks!.length > 0) {
-      const newCurrentView = searchListBooks!.filter((item) => item.id !== id)
-      setSearchListBooks([...newCurrentView])
-    }
-    if (currentView.length === 1) {
-      const cur = currentPage
-      setCurrentPage(cur - 1)
+    if (ItemDelete) {
+      const { id } = ItemDelete
+      const newList = itemBooks.filter((item) => item.id !== id)
+      setItemBooks(newList)
+      setItemDelete(undefined)
+      if (newList.length > 0) {
+        localStorage.setItem('currentData', JSON.stringify(newList))
+      }
+      if (
+        currentView.length < maxView &&
+        searchListBooks &&
+        searchListBooks.length > 0
+      ) {
+        const newCurrentView = searchListBooks.filter((item) => item.id !== id)
+        setSearchListBooks([...newCurrentView])
+      }
+      if (currentView.length === 1) {
+        const cur = currentPage
+        setCurrentPage(cur - 1)
+      }
     }
   }
 
@@ -76,7 +84,7 @@ function ModalDeleteBook() {
           <p>
             Do you want to delete{' '}
             <mark className={`delete-name ${theme === 'dark' && 'dark'}`}>
-              {ItemDelete!.name}
+              {ItemDelete?.name}
             </mark>
             .
           </p>

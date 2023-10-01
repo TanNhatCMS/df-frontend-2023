@@ -1,3 +1,22 @@
+:root {
+	--primary-button-color: #d2455a;
+	--primary-button-color-dark: #c33232;
+	--primary-button-color-hover: #b40000;
+	--primary-button-color-hover-dark: #da5d6b;
+	--secondary-button-color: #e0e0e0;
+	--secondary-button-color-dark: #e6e6e6;
+	--secondary-button-color-hover: #c2c2c2;
+	--secondary-button-color-hover-dark: #cecece;
+	--primary-color: #fefefe;
+	--primary-color-dark: #282828;
+	--secondary-color: #f7f8f9;
+	--secondary-color-dark: #3f3f3f;
+	--border-color: #c9d4dd;
+	--border-color-dark: #717171;
+	--outlay-color: rgba(152, 152, 152, 0.114);
+	--font-close-button: 2rem;
+	--modal-padding: 2rem;
+}
 .pagination-button {
   border: var(--border-color) 1px solid;
   padding: 10px;
@@ -6,19 +25,18 @@
 .pagination-button.dark {
   background-color: var(--secondary-button-color-dark);
   border: var(--border-color-dark) 1px solid;
-  /* color: #c9d4dd; */
 }
 .pagination-wrapper {
   float: right;
   margin: 10px 0;
 }
+.pagination-wrapper.dark {
+  background-color: var(--secondary-color-dark);
+}
 .activePage {
   background-color: var(--secondary-color);
-  /* color: #fff; */
   font-weight: bold;
 }
 .activePage.dark {
   background-color: var(--secondary-button-color-hover-dark);
-  /* color: #fff;
-	color: #c9d4dd; */
 }
