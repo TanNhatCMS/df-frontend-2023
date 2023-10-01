@@ -130,6 +130,12 @@ function AddBookModal() {
               <option value="Devops" className="topicOption">
                 Devops
               </option>
+              <option value="Frontend" className="topicOption">
+                Frontend
+              </option>
+              <option value="Backend" className="topicOption">
+                Backend
+              </option>
             </select>
           </label>
 
