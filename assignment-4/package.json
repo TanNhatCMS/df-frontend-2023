@@ -14,18 +14,22 @@
     "start": "next start",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
-    "preinstall": "npx only-allow pnpm"
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "cd .. && husky install assignment-4/.husky"
   },
   "dependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "next": "^13.5.3",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sharp": "^0.32.6"
   },
   "devDependencies": {
     "@dwarvesf/react-eslint-config": "^1.0.1",
     "@next/eslint-plugin-next": "^13.5.3",
     "@types/node": "^20.7.0",
-    "@types/react": "^18.2.22",
+    "@types/react": "^18.2.23",
     "@types/react-dom": "^18.2.7",
     "autoprefixer": "^10.4.16",
     "eslint": "^8.50.0",
@@ -37,5 +41,11 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "lint-staged": {
+    "*.tsx": [
+      "pnpm run lint",
+      "git add ."
+    ]
   }
 }
