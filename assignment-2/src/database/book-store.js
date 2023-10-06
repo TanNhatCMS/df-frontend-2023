@@ -19,7 +19,7 @@ const allBooks = [
   },
   {
     id: 4,
-    name: 'JavaScript: The Good Parts',
+    name: 'JavaScript The Good Parts',
     author: 'Douglas Crockford',
     topic: 'Frontend',
   },
